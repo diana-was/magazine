@@ -1,0 +1,601 @@
+/*!
+Author: Diana De Vargas for We Are Social Australia
+Author URI: http://wearesocial.net/
+Version: 1.0
+*/
+
+
+.front-page-flip() {
+    .right-page-flip(@flipX;@flipY;@flipDeg;@flipTimer);
+}
+ 
+#viewZone {
+//  max-width: @viewZone;
+    .box-sizing(content-box);
+    height: auto;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.desk {
+    .box-sizing(content-box);
+    width   : (@magWidth*2);
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    &:before{
+        content: "";
+        display: block;
+        padding-top: @magHeight + @magMarginH;  /* initial ratio of 3:4*/
+    }
+
+    .magazine_help {
+       .box-sizing(content-box); 
+       z-index : 10;
+       position: absolute;
+       min-width : 100px;
+       width: 20%;
+       top: 45%;
+       left : 12.5%;
+       border: 1px solid;
+       padding: 10px;
+       margin: 0px;
+    }
+    
+    #imageHolder {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        padding: @magMarginH @magMargin;
+        #magazineHolder {
+            padding:0 0 0 @magWidth;
+            width : 100%;
+            height: 100%;
+            #magazine {
+                position: relative;
+                width: @magInWidth;
+                height: @magInHeight;
+                
+            }     
+        }
+        background: url(@cover) 0 0 no-repeat;
+        background-size: cover;
+        &.openBook {
+            background-image: url(@dustJacket);
+        }
+        &.finishBook {
+            background-image: url(@backCover);
+        }
+    }
+}
+
+
+#magazine{
+    .box-sizing(content-box);
+    
+    .leaf {
+        //position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        .right_page_holder {
+            overflow: visible;
+        }
+        .left_page_holder {
+            display: none;
+        }
+        .shadow_holder {
+            display: none;
+        }
+    }
+    .show_corner, .show_page {
+        .right_page_holder {
+            overflow: hidden;
+        }
+       .left_page_holder {
+            display: block;
+        }
+        .shadow_holder {
+            display: block;
+        }
+        .right_page_rotator {
+            z-index : initial!important;
+        }
+    }
+    
+    // Front page - right page
+    // -----------------------
+    // |          |          |
+    // |          |          |
+    // |          |   this   |
+    // |          |          |
+    // |          |          |
+    // -----------------------
+
+    .right_page_rotator {
+        // ---------------------\
+        // |                     \
+        // |                     |
+        // |  this rotates p1    |
+        // |   to create the     |
+        // |       corner        |
+        // -----------------------
+        width: @magInWidth;
+        height: @magInHeight;
+       .front-page-flip();
+    }
+   
+    .right_page_holder {
+        // -----------------------
+        // |                     |
+        // |   this gives        |
+        // |   the size.         |
+        // |   overflow cuts the |
+        // |   corner            |
+        // -----------------------
+        width: @flipZoneWidth;
+        height: @flipZoneHeight;
+        > div.right_page {
+            //            ---------\
+            //            |         \ 
+            //            |          |
+            //            |   the    |
+            //            | image    |
+            //            |          |
+            //            ------------
+            .flip(@reverseFlip, 0, @flipDeg, 0, 0);
+            .flip-page(@flipTimer);
+            position: relative;
+            width: @magPageWidth;
+            height: @magPageHeight;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin : 0 0 @magPageMargin 0;
+            
+            [data-type="double"] {
+                width : 200%!important;
+                float : right;
+                left  : 100%;
+            }
+
+            > div.right_page_gradient {
+                //            -
+                //            | 
+                //            |
+                //            |  <- this shadow 
+                //            | 
+                //            | 
+                //            -
+                width: @magGutter;
+                height: @magInHeight;
+                .bg-gradient(right, left, @black-15, @black-0);
+                position: absolute;
+                top : 0;
+                left: 0;
+            }
+        }
+    }
+    
+    // corner to flip the page
+    // makes the left page visible
+    // --------------------\  here
+    // |          |         \
+    // |          |          |
+    // |          |          |
+    // |          |          |
+    // |          |          |
+    // -----------------------
+    .flip_corner {
+            width: @flipWidth;
+            height: @flipHeight;
+            position: absolute;
+            .flip(@flipLpX, 0, (-1*@flipDeg), 0, 0);
+            overflow: visible;
+            
+            &.active {
+                display: none;
+            }
+    }
+
+    // left page
+    // -----------------------
+    // |          |          |
+    // |          |          |
+    // |  this    |          |
+    // |          |          |
+    // |          |          |
+    // -----------------------
+    .left_page_rotator {
+        // ---------------------\
+        // |                     \
+        // |                     |
+        // |    this rotates     |
+        // |   to create the     |
+        // |       corner        |
+        // -----------------------
+        width: @magInWidth;
+        height: @magInHeight;
+       .front-page-flip();
+     }
+    
+    .left_page_holder {
+        // -----------------------
+        // |                     |
+        // |   this gives        |
+        // |   the size          |
+        // |                     |
+        // |                     |
+        // -----------------------
+        width: @flipZoneWidth;
+        height: @flipZoneHeight;
+        overflow: hidden;
+        
+        > div.left_page {
+            //                \  here is the image 
+            //                 \
+            //                  \    /
+            // ------------------\  /
+            // |                  \/ | 
+            // |   makes the         |
+            // |   corner and holds  |
+            // |   the image         |
+            // |                     |
+            // -----------------------
+            .flip(@flipLeftPageX , @flipLeftPageY, (-1*@flipDeg), 0, 0);
+            .flip-page(@flipTimer);
+            .box-shadow (0, 0, @shadowWidth, @shadowAlpha);
+            position: relative;
+            width: @magPageWidth;
+            height: @magPageHeight;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin : 0 0 @magPageMargin 0;
+
+            [data-type="double"] {
+                width : 200%!important;
+            }
+
+            > div.left_page_gradient {
+                //            -
+                //            | 
+                //            |
+                //            |  <- this shadow 
+                //            | 
+                //            | 
+                //            -
+                width: @magGutter;
+                height: @magInHeight;
+                .bg-gradient(left, right,  @black-15,  @black-0);
+                position: absolute;
+                top : 0;
+                right: 0;
+            }
+        }
+        
+    }
+    
+    // shadow
+    //          ||           /
+    //          ||           \
+    //          || 
+    //          ||  from the corner
+    //          ||  to the middle
+    //          ||  
+    //          ||  
+    .shadow_holder{
+        //            ------------
+        //            |  the     | 
+        //            | shape    |
+        //            | to show  |
+        //            | the      |
+        //            | corner   |
+        //            ------------
+        width: @magInWidth;
+        height: @magInHeight;
+        position: absolute;
+        overflow: hidden;
+        .widden-page(0.5s,easy,@flipTimer );
+   
+        .rp_shadow_rotator {
+            //                     \\
+            //                      \\
+            //           
+            //            the shadow
+            //            
+            //            rotate the space  
+            //            to create a corner
+            position: absolute;
+            width: 100%;
+            height: @flipZoneHeight;
+            .flip(@flipRpShadowX, 0, (-1*@flipDeg), 0, 0);
+            .flip-page(@flipTimer);
+        }
+            
+        .rp_shadow_gradient {
+            //                     \\
+            //                      \\
+            //           
+            //            the shadow
+            //            
+            //            
+            //            
+            width: @cornerWidth;
+            height: 100%;
+            .bg-gradient(right, left, @black-18, @black-0);
+            .widden-page(@flipTimer);
+            overflow: hidden;
+        }
+    }
+    
+    // shadow
+    //          ||           /
+    //          ||           \
+    //          || 
+    //          ||  from the corner
+    //          ||  to the middle
+    //          ||  
+    //          ||  
+    .shadow_rotator {
+        //                     \\
+        //                      \\
+        //           
+        //            the shadow
+        //            
+        //            rotates the space  
+        //            to make the corner
+        position: absolute;
+        width: 100%;
+        height: @flipZoneHeight;
+        .flip(@flipLpShadowX, 0, (-1*@flipDeg), 0, 0);
+        .flip-page(@flipTimer);
+        
+        .shadow_gradient {
+            //                     \\
+            //                      \\
+            //           
+            //            the shadow
+            //            
+            //            
+            //            
+            width: @lpShadowWidth;
+            height: 100%;
+            .bg-gradient(left, right, @black-18, @black-0);
+            .widden-page(@flipTimer);
+            overflow: hidden;
+        }
+
+        .shadow_opacity {
+            opacity: 1;
+            .transition-duration(@flipTimer/2);
+        }
+    }
+
+
+    
+    .flip_left {
+        //          ||           \\
+        //          ||            \\
+        //          || 
+        //          ||  the shadow
+        //          ||  
+        //          ||  move it from the 
+        //          ||  corner to the middle
+        .rp_shadow_rotator {
+           .flip(0, 0, 0deg, -0, 0); 
+        }
+        .rp_shadow_gradient {
+           width: @shadowWidth; 
+        }
+
+        //          
+        //          
+        //    fade the shadow       
+        //          
+        //          
+        //            
+        //            
+        .shadow_opacity { 
+           opacity: 0;
+        }
+        //          ||           /
+        //          ||           \
+        //          || 
+        //          ||  move from the corner
+        //          ||  to the middle
+        //          ||  
+        //          ||  
+        .shadow_rotator {
+            .flip((-1*@lpShadowWidth), 0, 0deg, 0, 0);
+        } 
+        //
+        //front page hide
+        //
+        .right_page_rotator {
+            // -----------
+            // |          |
+            // |          |  move zone to the
+            // |          |  left and show
+            // |          |  next right page
+            // |          |  page 3
+            // -----------
+           .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
+        }
+        .right_page_holder > div.right_page {
+            //              ------------
+            //              | hide     | 
+            //              | the page |
+            //              | here     |
+            //              |          |
+            //              |          |
+            //              ------------
+            .flip(@flipZoneWidth, 0, 0deg, 3%, 0);
+        }
+       
+        // shows page 2
+        .left_page_rotator {
+            //          ----------\
+            //          |          \/
+            //          |          |  move page         
+            //          |  this    |  from the        
+            //          |          |  corner down       
+            //          |          |         
+            //          ------------
+           .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
+         }
+        .left_page_holder > div.left_page {
+            // ------------
+            // |          |     
+            // |          |    move page      
+            // |  this    |    to position    
+            // |          |         
+            // |          |         
+            // ------------
+           .flip((@flipZoneWidth - @magInWidth + 0.7%), 0, 0deg, 0, 0);
+        }
+        .flip_corner {
+           //transform origin is used to check if the div is on the left or right.
+           .flip(@flipLpRevShadowX, @flipLpRevShadowY, @flipDeg, 0, 0);
+        }
+    }
+
+    .flip_left .on_left {
+        .shadow_holder {
+            width   : 0;
+        }
+    }
+        
+    .flip_left.on_left {
+        .rp_shadow_gradient {
+           width   : 0;
+        }
+    }
+
+    #magazineIndex  {
+        .box-sizing(padding-box);
+        padding: 2% 7%;
+        width: 100%;
+        margin: 0;
+        .center-block();
+        img {
+            width: 35px;
+            margin-right: 15px;
+        }
+        color : @nav-link-color;
+    
+        //
+        // Navs
+        // --------------------------------------------------
+        ul {
+          margin-bottom: 0;
+          padding-left: 0; // Override default ul/ol
+          list-style: none;
+          &:extend(.clearfix all);
+        
+          > li {
+            position: relative;
+            display: block;
+        
+            > a {
+              position: relative;
+              display: block;
+              padding: @nav-link-padding;
+              &:hover,
+              &:focus {
+                text-decoration: none;
+                background-color: @nav-link-hover-bg;
+              }
+            }
+          }
+        
+          // Prevent IE8 from misplacing imgs
+          //
+          // See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
+          > li > a > img {
+            max-width: none;
+          }
+        }
+        
+        // Pills
+        // -------------------------
+        .pills {
+          > li {
+            float: left;
+        
+            // Links rendered as pills
+            > a {
+              border-radius: 0;
+            }
+            + li {
+              margin-left: 2px;
+            }
+        
+            // Active state
+            &.active > a {
+              &,
+              &:hover,
+              &:focus {
+                color: @nav-link-hover-color;
+                background-color: @nav-link-hover-bg;
+              }
+            }
+          }
+        }
+        
+        
+        // Stacked pills
+        .stacked {
+          > li {
+            float: none;
+            + li {
+              margin-top: 2px;
+              margin-left: 0; // no need for this gap between nav items
+            }
+          }
+        }
+        
+        
+        // Nav variations
+        // --------------------------------------------------
+        
+        // Justified nav links
+        // -------------------------
+        
+        .justified {
+          width: 100%;
+        
+          > li {
+            float: none;
+             > a {
+              text-align: center;
+              margin-bottom: 5px;
+            }
+          }
+        
+          > .dropdown .dropdown-menu {
+            top: auto;
+            left: auto;
+          }
+        
+          @media (min-width: @screen-sm-min) {
+            > li {
+              display: table-cell;
+              width: 1%;
+              > a {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+        
+        
+        
+    }
+
+}

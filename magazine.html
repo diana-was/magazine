@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<!--  link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" -->
+<link rel="stylesheet" href="js/vendor/jquery-ui.css">
+<link href='style/magazine.css' rel='stylesheet' type='text/css'>
+<!--  link href='style/themePureWhite.css' rel='stylesheet' type='text/css' -->
+<link href='style/custom.css' rel='stylesheet' type='text/css'>
+<!-- script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script -->
+<script src="js/vendor/jquery.min.js"></script>
+<!-- script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script -->
+<script src="js/vendor/jquery-ui.min.js"></script>
+<script src="js/vendor/bootstrap-3.1.1/bootstrap.min.js"></script>
+<script src="js/magazine.js"></script>
+<script> 
+    // When the document loads do everything inside here ...  
+    $(document).ready(function(){  
+        var headerH = $('#magazineHeaderRight').outerHeight() + 'px';
+        $.manageMagazine.init({loadThreshold:10, magHldMrgOut: headerH, magHldMrgIn: '4%' });
+        $("img").magazine({container: $('#magazineBody'),
+            contentMarkup    : {
+                titleTag    : 'h3',
+                titleClass  : '',
+                wrapperTag  : 'div',
+                wrapperClass: '',
+                groupTag    : 'ul',
+                groupClass  : 'nav nav-pills nav-stacked',
+                itemTag     : 'li',
+                itemClass   : ''
+            }
+        });
+                       
+        $('#menu').on('click',function(e){ 
+            $.manageMagazine.goToContentPage();
+        });
+        
+    });
+</script>  
+</head>
+<body class="magazine-xs magazine-sm magazine-md magazine-lg">
+    <section id="magazineContainer">
+        <div class="container-fluid">
+            <div id="rightColumn" class="row">
+                <div id="magazineHeaderLeft" class="col-md-2 col-sm-2 col-sx-12">
+                    <div class="magazine-header">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                              <button id="menu" type="button" class="btn btn-menu btn-link">
+                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <p>Menu</p>
+                              </button>
+                            </li>
+                            <li id="logo" class="visible-xs">
+                               <h2 class="text-center">Title</h2>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="magazineHeaderRight" class="col-md-10 col-sm-10 ">
+                    <div class="magazine-header hidden-xs">
+                        <h2 class="text-center">Title</h2>
+                    </div>
+                </div>
+            </div>
+            <div id="leftColumn" class="row">
+                <div id="magazineBody" class="col-md-12 col-sm-12 col-sx-12">
+                    <img src="" data-src="images/image-03.jpg" width="100%" height="100%" data-type='frontcover' data-title="Cover" data-image="images/image-03.jpg"/>
+                    <img src="" data-src="images/image-01.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-01.jpg"/>
+                    <img src="" data-src="images/image-02.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-02.jpg"/>
+                    <img src="" data-src="images/image-04.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-04.jpg"/>
+                    <img src="" data-src="images/image-06.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-06.jpg"/>
+                    <img src="" data-src="images/image-07.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-07.jpg"/>
+                    <img src="" data-src="images/image-05.jpg" width="200%" height="100%" data-type='double' data-title="" data-image="images/image-05.jpg"/>
+                    <img src="" data-src="images/image-08.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-08.jpg"/>
+                    <img src="" data-src="images/image-09.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-09.jpg"/>
+                    <img src="" data-src="images/image-10.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-10.jpg"/>
+                    <img src="" data-src="images/image-11.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-11.jpg"/>
+                    <img src="" data-src="images/image-12.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-12.jpg"/>
+                    <img src="" data-src="images/image-14.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-14.jpg"/>
+                    <img src="" data-src="images/image-13.jpg" width="200%" height="100%" data-type='double' data-title="" data-image="images/image-13.jpg"/>
+                    <img src="" data-src="images/image-15.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-15.jpg"/>
+                    <img src="" data-src="images/image-16.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-16.jpg"/>
+                    <img src="" data-src="images/image-17.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-17.jpg"/>
+                    <img src="" data-src="images/image-18.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-18.jpg"/>
+                    <img src="" data-src="images/image-19.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-19.jpg"/>
+                    <img src="" data-src="images/image-20.jpg" width="100%" height="100%" data-type='backcover' data-title="" data-image="images/image-20.jpg"/>
+                </div>
+            </div>
+            <div class="row">
+                <div id="magazineFooter" class="col-md-12">
+                    <div><p><span class="glyphicon glyphicon-copyright-mark"></span> Magazine all rights reserved</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+

@@ -1,0 +1,181 @@
+// Handy mixin 
+
+// Retina images
+//
+// Short retina mixin for setting background-image and -size
+
+.img-retina(@file-1x; @file-2x; @width-1x; @height-1x) {
+  background-image: url("@{file-1x}");
+
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    background-image: url("@{file-2x}");
+    background-size: @width-1x @height-1x;
+  }
+}
+
+
+// Responsive image
+//
+// Keep images from scaling beyond the width of their parents.
+
+.img-responsive(@display: block) {
+  display: @display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
+
+// Center-align a block level element
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.square(@size) {
+  .size(@size; @size);
+}
+
+.box-sizing(@box-model) {
+  -webkit-box-sizing: @box-model; // Safari <= 5
+     -moz-box-sizing: @box-model; // Firefox <= 19
+          box-sizing: @box-model;
+}
+
+.box-shadow (@x: 0px; @y: 3px; @blur: 5px; @alpha: 0.5) {
+    box-shadow:         @x @y @blur rgba(0, 0, 0, @alpha);
+    -moz-box-shadow:    @x @y @blur rgba(0, 0, 0, @alpha);
+    -o-box-shadow:      @x @y @blur rgba(0, 0, 0, @alpha);
+    -ms-box-shadow:     @x @y @blur rgba(0, 0, 0, @alpha);
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.gradient (@origin: left; @start: #ffffff; @stop: #000000) {
+    background-color: @start;
+    background-image: linear-gradient(@origin, @start, @stop);
+    background-image: -moz-linear-gradient(@origin, @start, @stop);
+    background-image: -o-linear-gradient(@origin, @start, @stop);
+    background-image: -ms-linear-gradient(@origin, @start, @stop);
+    background-image: -webkit-linear-gradient(@origin, @start, @stop);
+}
+
+.quick-gradient (@origin: left; @alpha: 0.2) {
+    background-image: linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+	background-image: -moz-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -o-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -ms-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -webkit-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+}
+    
+.bg-gradient (@origin; @end; @start: #ffffff; @stop: #000000) {
+    background: linear-gradient(to @end, @start, @stop);            /* Standard syntax */    
+    background: -moz-linear-gradient(@end, @start, @stop);          /* For Firefox 3.6 to 15 */
+    background: -o-linear-gradient(@end, @start, @stop);            /* For Opera 11.1 to 12.0 */
+    background: -ms-linear-gradient(@end, @start, @stop);
+    background: -webkit-linear-gradient(@end, @start, @stop);    /* For Safari 5.1 to 6.0 */
+    background: -webkit-gradient(linear, @origin, @end, from(@start), to(@stop));
+}
+
+// Page flip mixing
+.rotate(@dg;@x:50%;@y:50%) {
+    transform-origin:@x @y;
+    transform:rotate(@dg);
+    -ms-transform-origin:@x @y; 
+    -ms-transform: rotate(@dg);         // IE 9
+    -webkit-transform-origin:@x @y; 
+    -webkit-transform: rotate(@dg);     // Safari and Chrome    
+}
+
+.translate(@tx;@ty;@x:50%;@y:50%) {
+    transform-origin:@x @y;
+    transform:translate(@tx,@ty);
+    -ms-transform-origin:@x @y;
+    -ms-transform: translate(@tx,@ty);      // IE 9 
+    -webkit-transform-origin:@x @y;         
+    -webkit-transform: translate(@tx,@ty);  // Safari and Chrome
+}
+
+.flip(@tx;@ty;@dg;@x:50%;@y:50%) {
+    transform-origin:@x @y;
+    transform:translate(@tx,@ty) rotate(@dg);
+    -ms-transform-origin:@x @y; 
+    -ms-transform: translate(@tx,@ty) rotate(@dg);          //IE 9
+    -webkit-transform-origin:@x @y; 
+    -webkit-transform: translate(@tx,@ty) rotate(@dg);      // Safari and Chrome
+}
+
+.flip-corner(@tx;@ty;@dg;@t2x;@t2y;@x:50%;@y:50%) {
+    transform-origin:@x @y;
+    transform:translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y);
+    -ms-transform-origin:@x @y; /* IE 9 */
+    -ms-transform: translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y);     //IE 9
+    -webkit-transform-origin:@x @y; /* Safari and Chrome */
+    -webkit-transform: translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y); // Safari and Chrome
+}
+
+.transition-duration (@t:1s){
+    transition-duration: @t;
+    -ms-transition-duration: @t;
+    -webkit-transition-duration: @t;
+}
+
+.transition-timing-function (@f:easy){
+    transition-timing-function: @f;
+    -ms-transition-timing-function: @f;
+    -webkit-transition-timing-function: @f;
+}
+
+.transition-delay (@d:0){
+    transition-delay: @d;
+    -ms-transition-delay: @d;
+    -webkit-transition-delay: @d;
+}
+
+
+.flip-page (@t:1s;@f:easy-in-out;@d:0){
+    .transition-duration(@t);
+    .transition-timing-function(@f);
+    .transition-delay(@d);
+
+    transition-property: transform,  transform-origin, display;
+    -moz-transition-property: transform,  transform-origin, display;
+    -o-transition-property: transform,  transform-origin, display;
+    -ms-transition-property: -ms-transform, -ms-transform-origin, display;               // IE
+    -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;   // Safari 
+    
+}
+
+.widden-page (@t:1s;@f:easy-in-out;@d:0){
+    .transition-duration(@t);
+    .transition-timing-function(@f);
+    .transition-delay(@d);
+
+    transition-property: width;
+    -moz-transition-property: width;        // Firefox 4 
+    -o-transition-property: width;          // Opera
+    -ms-transition-property: width;         //IE
+    -webkit-transition-property: width;     // Safari 
+}
+
+.transition-margin (@t:1s;@f:easy-in-out;@d:0){
+    .transition-duration(@t);
+    .transition-timing-function(@f);
+    .transition-delay(@d);
+
+    transition-property: margin;
+    -moz-transition-property: margin;       // Firefox 4 
+    -o-transition-property: margin;         // Opera
+    -ms-transition-property: margin;        //IE
+    -webkit-transition-property: margin;    // Safari 
+}
+
+.right-page-flip(@x;@y;@deg;@t:1s) {
+    position: absolute;
+    .flip(@x , @y, (@deg * -1), 0, 0);
+    .flip-page(@t);
+}

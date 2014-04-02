@@ -1,0 +1,11 @@
+// Sprite sheet mixin
+.sprite(@file-1x: @sprite-1x, @file-2x: @sprite-2x, @width-1x: @sprite-width, @height-1x: @sprite-height) {
+    .img-retina(@file-1x, @file-2x, @width-1x, @height-1x);
+}
+
+.transition-timing (@f:easy){
+    transition-timing-function: @f;
+    -ms-transition-timing-function: @f;
+    -webkit-transition-timing-function: @f;
+}
+

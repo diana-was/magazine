@@ -1,0 +1,115 @@
+@image-path: "../images/";
+
+// Colors
+@white:     #ffffff;
+@red:       #942524;
+@black:     #000;
+@gray:      #555;
+
+// opacities
+@black-0    : rgba(0,0,0,0);
+@black-50   : rgba(0, 0, 0, .5);
+@black-25   : rgba(0, 0, 0, .25);
+@black-20   : rgba(0, 0, 0, .20);
+@black-18   : rgba(0, 0, 0, .18);
+@black-15   : rgba(0, 0, 0, .15);
+
+// Scaffolding
+// -------------------------
+@bodyBackground:        @black;
+@textColor:             @gray;
+
+// Typography
+// -------------------------
+@sansFontFamily:        Arial, sans-serif;
+@altFontFamily:         "futura_condensedbold", Arial, sans-serif;
+
+@baseFontSize:          15px;
+@baseFontFamily:        @sansFontFamily;
+@baseLineHeight:        20px;
+
+@headingsFontFamily:    @sansFontFamily;
+@headingsFontWeight:    bold;    // instead of browser default, bold
+@headingsColor:         inherit; // empty to use BS default, @textColor
+
+@nav-link-color:        @white;
+@nav-link-hover-color:  @red;     
+@nav-link-hover-bg:     @gray;     
+@nav-link-padding:      10px 15px;;
+
+// Page Size
+// -------------------------
+@ratio          : 2/3;  //2/3; //4/3; // 3:4
+@viewZone       : 100%;
+@magWidth       : 50%;
+@magMargin      : 2%;
+@magGutter      : 3%;
+@flipTimer      : 2s;
+@flipDeg        : 32deg;
+@shadowWidth    : 3%;
+@shadowAlpha    : 0.5;
+
+// calculated Variables -- Do NOT change
+// -------------------------
+@magMarginH     : round(@magMargin * @ratio);
+@cornerWidth    : 10%;
+@cornerHeight   : round(@cornerWidth / cos(@flipDeg));
+@magHeight      : round(@magWidth * @ratio);
+@magPageBetaX   : round(asin(1/sqrt(1+pow(@ratio,2)))*180deg/pi(),5);
+@magPageAlphaX  : round(-1 * (@magPageBetaX - (90deg - @flipDeg)),5);
+@magPageBetaY   : round(asin(1/sqrt(1+pow(1/@ratio,2)))*180deg/pi(),5);
+@magPageAlphaY  : round(-1 * (@magPageBetaY - (90deg - @flipDeg)),5);
+@magInWidth     : 100%;
+@magInHeight    : 100%;
+@magInHeightR   : @magInWidth * @ratio;
+@magInWidthR    : @magInHeight / @ratio;
+@flipWidth      : @cornerWidth + @shadowWidth;
+@flipHeight     : 2*@cornerHeight;
+@flipZoneWidthT : round((@magInHeightR * sin(@flipDeg)) + (@magInWidth * cos(@flipDeg)));
+@flipZoneWidth  : round(((@magInHeightR * sin(@flipDeg)) + (@magInWidth * cos(@flipDeg))) - @cornerWidth);
+@flipZoneHeight : round((@magInHeight * cos(@flipDeg)) + (@magInWidthR * sin(@flipDeg)));
+@magPageWidth   : round((100% / cos(@magPageAlphaX)) * sin(@magPageBetaX) * 100 / (100% - @cornerWidth)) - 1%;
+@magPageHeight  : round((100% / cos(@magPageAlphaY)) * sin(@magPageBetaY));
+@magPageHeightC : 100% / @ratio;
+@magPageMargin  :round(@flipZoneHeight - (100% * @ratio / cos(@magPageAlphaY)) * sin(@magPageBetaY));
+
+@flipX          : -1 * round(@magInHeightR * sin(@flipDeg) * cos(@flipDeg));
+@flipY          : round((@magInHeight * sin(@flipDeg)) * cos(@flipDeg) * tan(@flipDeg));
+@reverseFlip    : round(@magInHeightR * sin(@flipDeg));
+@flipLeftPageX  : @flipZoneWidth - @cornerWidth; 
+@flipLeftPageY  : ceil(@magInWidthR * sin(@flipDeg));
+
+@lpShadowWidth  : 5%;
+@flipRpShadowX  : round(@magInWidth - (@cornerWidth / cos(@flipDeg)));
+@flipLpShadowX  : round(@magInWidth - (@cornerWidth / cos(@flipDeg)) - (@lpShadowWidth / cos(@flipDeg)));
+
+@flipLpX        : round((10000% / @flipWidth) - (100% / cos(@flipDeg)));
+@flipLpRevShadowY: -1 * ceil(100% * sin(@flipDeg));
+@flipLpRevShadowX: -1 * ((10000% / @flipWidth) + ceil((@flipLpRevShadowY * @ratio) * tan(@flipDeg)));
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+@screen-xs-min:              480px;
+
+// Small screen / tablet
+@screen-sm-min:              768px;
+
+// Medium screen / desktop
+@screen-md-min:              992px;
+
+// Large screen / wide desktop
+@screen-lg-min:              1200px;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+//images
+@cover :                    "@{image-path}book-front-cover.png";
+@backCover :                "@{image-path}book-back-cover.png";
+@dustJacket :               "@{image-path}book-open.jpg";
+

@@ -1,0 +1,278 @@
+@bootstrap-path: "../less-bootstrap-3.1.1/";
+
+// Core variables and mixins
+@import "@{bootstrap-path}variables.less";
+@import "_variables-custom.less";
+@import "@{bootstrap-path}mixins.less";
+@import "_mixins-custom.less";
+
+// Reset
+@import "@{bootstrap-path}normalize.less";
+// @import "@{bootstrap-path}print.less";
+
+// Core CSS
+@import "@{bootstrap-path}scaffolding.less";
+@import "@{bootstrap-path}theme.less";
+@import "@{bootstrap-path}type.less";
+// @import "@{bootstrap-path}code.less";
+@import "@{bootstrap-path}grid.less";
+// @import "@{bootstrap-path}tables.less";
+@import "@{bootstrap-path}forms.less";
+@import "@{bootstrap-path}buttons.less";
+
+// Components
+@import "@{bootstrap-path}component-animations.less";
+@import "@{bootstrap-path}glyphicons.less";
+@import "@{bootstrap-path}dropdowns.less";
+// @import "_dropdowns-custom.less";
+@import "@{bootstrap-path}button-groups.less";
+// @import "@{bootstrap-path}input-groups.less";
+@import "@{bootstrap-path}navs.less";
+// @import "@{bootstrap-path}breadcrumbs.less";
+// @import "@{bootstrap-path}pagination.less";
+// @import "@{bootstrap-path}pager.less";
+@import "@{bootstrap-path}labels.less";
+// @import "@{bootstrap-path}badges.less";
+// @import "@{bootstrap-path}jumbotron.less";
+@import "@{bootstrap-path}thumbnails.less";
+// @import "@{bootstrap-path}alerts.less";
+// @import "@{bootstrap-path}progress-bars.less";
+@import "@{bootstrap-path}media.less";
+// @import "@{bootstrap-path}list-group.less";
+// @import "@{bootstrap-path}panels.less";
+// @import "@{bootstrap-path}wells.less";
+@import "@{bootstrap-path}close.less";
+@import "@{bootstrap-path}navbar.less";
+
+// Components w/ JavaScript
+// @import "@{bootstrap-path}modals.less";
+// @import "@{bootstrap-path}tooltip.less";
+// @import "@{bootstrap-path}popovers.less";
+// @import "@{bootstrap-path}carousel.less";
+
+body {
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+// Buttons
+.btn {
+    text-transform: uppercase;
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      .opacity(.2); //more opaque than BS default
+    }
+}
+
+//lh + l/2 + h2*1.1 - (h2*1.1 + h2*0.33 + 2) 
+@btn-menu-margin: round(( @line-height-computed + round(@line-height-computed / 2) - (@font-size-h2 * 0.33) - 6px ) / 2);
+
+.btn-menu {
+    // line-height: ensure even-numbered height of button next to large input
+    .button-size(@btn-menu-margin; @btn-menu-margin; @font-size-h2; 1.1; 0);
+  
+    .glyphicon { 
+        margin-right: 5px;
+        margin-left: 5px;  
+        line-height: 1.1;
+    }
+    
+    p {
+        margin: 0;
+        font-size: round(@font-size-h2 * 0.3);
+    }
+}
+
+// Typography
+p,
+ul,
+ol {
+    font-weight: 400;  //for 'Open Sans'
+    strong { font-weight: bold; }
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-family: @font-family-secondary;
+}
+
+
+// Sprite class
+.spr { .sprite(); }
+
+.magazine_help {
+    color: @gray-light;
+    border-color: @gray-light;
+}
+
+
+// Sreens 
+.magazine-xs {
+  @media (max-width: @screen-xs-max) {
+  }
+}
+.magazine-sm {
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  }
+}
+.magazine-md {
+  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  }
+}
+.magazine-lg {
+  @media (min-width: @screen-lg-min) {
+  }
+}
+
+
+html,
+body {
+    position: relative; // for footer position:absolute
+    -webkit-font-smoothing: antialiased;
+}
+
+#magazineContainer {
+    margin: 0;
+    position:relative;
+}
+
+// Magazine
+.magazine-header {
+    background-color:  @body-invert-bg;
+    color: @text-invert-color;
+    
+   width:100%;
+   height: 10%;
+   overflow: auto;
+   z-index: @zindex-bars;
+
+   min-height: @line-height-computed + round(@line-height-computed / 2) + @font-size-h2 + 4px;
+   margin: 0 0 0 0;
+
+   // Prevent floats from breaking the navbar
+   &:extend(.clearfix all);
+
+   @media (min-width: @grid-float-breakpoint) {
+   }
+   
+   #logo {
+      padding-left: 45%;
+   }
+
+    .btn-link {
+        color : @link-invert-color;
+        &:hover,
+        &:focus  {
+            color: @link-invert-hover-color;
+        }
+    }
+}
+
+#magazineBody {
+    .box-sizing(content-box);
+    margin: 2% auto;
+    padding: 0;
+}
+
+#magazineFooter {
+   background-color:  @body-invert-bg;
+   color: @text-invert-color;
+   width:100%;
+   overflow: visible;
+   padding: 0.5em 2%;
+   z-index: 1;
+}
+
+.desk {
+    background: @body-bg;
+}
+
+#magazine{
+    color: @mag-text-color;
+    .magazine_help {
+        border-color: @mag-border-color;
+    }
+    // Front page - right page
+    // -----------------------
+    // |          |          |
+    // |          |          |
+    // |          |   this   |
+    // |          |          |
+    // |          |          |
+    // -----------------------
+    .right_page_holder {
+        > div.right_page {
+            background: @mag-bg;
+            //border: 1px solid @mag-border-color;
+        }
+    }
+
+    // left page
+    // -----------------------
+    // |          |          |
+    // |          |          |
+    // |  this    |          |
+    // |          |          |
+    // |          |          |
+    // -----------------------
+    .left_page_holder {
+        > div.left_page {
+            background: @mag-bg;
+            //border: 1px solid @mag-border-color;
+        }
+    }
+    
+    div [data-title='endpaper']  {
+        width : 100%;
+        height: 100%;
+        border: 1px solid @mag-border-color;
+    }
+    
+    #magazineIndex {
+        height: 100%;
+        
+        > h3 {
+            text-align: center;
+        }
+       
+        > ul {
+            display: block;
+    
+            a {
+                color : @white;
+                &:hover,
+                &:focus  {
+                    color: @link-invert-color;
+                    background-color: @body-invert-bg;
+                }
+                
+                span.pagenumber {
+                    float: right;
+                }
+            }
+        }
+
+            img {
+                width : 15%;
+            }
+    
+        .nav-pills > li > a {
+            border-radius: 0;
+            &:active,
+            &.active {
+                border-color: @body-invert-bg;
+            }
+    
+        }
+    }
+        
+}
+
+
+// Utility classes
+@import "@{bootstrap-path}utilities.less";
+@import "@{bootstrap-path}responsive-utilities.less";

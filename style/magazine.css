@@ -1,0 +1,585 @@
+/*!
+Author: Diana De Vargas for We Are Social Australia
+Author URI: http://wearesocial.net/
+Version: 1.0
+*/
+/*!**************************************************************************
+*
+* NB. DO NOT EDIT THE CONTENTS OF THIS CSS FILE DIRECTLY!
+* All CSS has been compiled from LESS Dynamic Stylesheets and minified
+* using CodeKit. Any style changes must be made to the original LESS files
+* then recompiled to CSS, otherwise your changes will likely be overwritten.
+*
+* For more info see http://lesscss.org/ and http://incident57.com/codekit/
+*
+****************************************************************************/
+/*!
+Author: Diana De Vargas for We Are Social Australia
+Author URI: http://wearesocial.net/
+Version: 1.0
+*/
+#viewZone {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: auto;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+.desk {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 100%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.desk:before {
+  content: "";
+  display: block;
+  padding-top: 34%;
+  /* initial ratio of 3:4*/
+}
+.desk .magazine_help {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  z-index: 10;
+  position: absolute;
+  min-width: 100px;
+  width: 20%;
+  top: 45%;
+  left: 12.5%;
+  border: 1px solid;
+  padding: 10px;
+  margin: 0px;
+}
+.desk #imageHolder {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding: 1% 2%;
+  background: url("../images/book-front-cover.png") 0 0 no-repeat;
+  background-size: cover;
+}
+.desk #imageHolder #magazineHolder {
+  padding: 0 0 0 50%;
+  width: 100%;
+  height: 100%;
+}
+.desk #imageHolder #magazineHolder #magazine {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.desk #imageHolder.openBook {
+  background-image: url("../images/book-open.jpg");
+}
+.desk #imageHolder.finishBook {
+  background-image: url("../images/book-back-cover.png");
+}
+#magazine {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+#magazine .leaf {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+#magazine .leaf .right_page_holder {
+  overflow: visible;
+}
+#magazine .leaf .left_page_holder {
+  display: none;
+}
+#magazine .leaf .shadow_holder {
+  display: none;
+}
+#magazine .show_corner .right_page_holder,
+#magazine .show_page .right_page_holder {
+  overflow: hidden;
+}
+#magazine .show_corner .left_page_holder,
+#magazine .show_page .left_page_holder {
+  display: block;
+}
+#magazine .show_corner .shadow_holder,
+#magazine .show_page .shadow_holder {
+  display: block;
+}
+#magazine .show_corner .right_page_rotator,
+#magazine .show_page .right_page_rotator {
+  z-index: initial!important;
+}
+#magazine .right_page_rotator {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-origin: 0 0;
+  transform: translate(-30%, 28%) rotate(-32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(-30%, 28%) rotate(-32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(-30%, 28%) rotate(-32deg);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin, display;
+  -moz-transition-property: transform, transform-origin, display;
+  -o-transition-property: transform, transform-origin, display;
+  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+}
+#magazine .right_page_holder {
+  width: 110%;
+  height: 164%;
+}
+#magazine .right_page_holder > div.right_page {
+  transform-origin: 0 0;
+  transform: translate(35%, 0) rotate(32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(35%, 0) rotate(32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(35%, 0) rotate(32deg);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin, display;
+  -moz-transition-property: transform, transform-origin, display;
+  -o-transition-property: transform, transform-origin, display;
+  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  position: relative;
+  width: 91%;
+  height: 61%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0 0 123% 0;
+}
+#magazine .right_page_holder > div.right_page [data-type="double"] {
+  width: 200%!important;
+  float: right;
+  left: 100%;
+}
+#magazine .right_page_holder > div.right_page > div.right_page_gradient {
+  width: 3%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* Standard syntax */
+  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Firefox 3.6 to 15 */
+  background: -o-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Opera 11.1 to 12.0 */
+  background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-gradient(linear, right, left, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0)));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#magazine .flip_corner {
+  width: 13%;
+  height: 24%;
+  position: absolute;
+  transform-origin: 0 0;
+  transform: translate(651%, 0) rotate(-32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(651%, 0) rotate(-32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(651%, 0) rotate(-32deg);
+  overflow: visible;
+}
+#magazine .flip_corner.active {
+  display: none;
+}
+#magazine .left_page_rotator {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-origin: 0 0;
+  transform: translate(-30%, 28%) rotate(-32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(-30%, 28%) rotate(-32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(-30%, 28%) rotate(-32deg);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin, display;
+  -moz-transition-property: transform, transform-origin, display;
+  -o-transition-property: transform, transform-origin, display;
+  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+}
+#magazine .left_page_holder {
+  width: 110%;
+  height: 164%;
+  overflow: hidden;
+}
+#magazine .left_page_holder > div.left_page {
+  transform-origin: 0 0;
+  transform: translate(100%, 80%) rotate(-32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(100%, 80%) rotate(-32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(100%, 80%) rotate(-32deg);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin, display;
+  -moz-transition-property: transform, transform-origin, display;
+  -o-transition-property: transform, transform-origin, display;
+  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -ms-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 91%;
+  height: 61%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0 0 123% 0;
+}
+#magazine .left_page_holder > div.left_page [data-type="double"] {
+  width: 200%!important;
+}
+#magazine .left_page_holder > div.left_page > div.left_page_gradient {
+  width: 3%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* Standard syntax */
+  background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Firefox 3.6 to 15 */
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Opera 11.1 to 12.0 */
+  background: -ms-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-gradient(linear, left, right, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0)));
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#magazine .shadow_holder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  transition-timing-function: easy;
+  -ms-transition-timing-function: easy;
+  -webkit-transition-timing-function: easy;
+  transition-delay: 2s;
+  -ms-transition-delay: 2s;
+  -webkit-transition-delay: 2s;
+  transition-property: width;
+  -moz-transition-property: width;
+  -o-transition-property: width;
+  -ms-transition-property: width;
+  -webkit-transition-property: width;
+}
+#magazine .shadow_holder .rp_shadow_rotator {
+  position: absolute;
+  width: 100%;
+  height: 164%;
+  transform-origin: 0 0;
+  transform: translate(88%, 0) rotate(-32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(88%, 0) rotate(-32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(88%, 0) rotate(-32deg);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin, display;
+  -moz-transition-property: transform, transform-origin, display;
+  -o-transition-property: transform, transform-origin, display;
+  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+}
+#magazine .shadow_holder .rp_shadow_gradient {
+  width: 10%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* Standard syntax */
+  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* For Firefox 3.6 to 15 */
+  background: -o-linear-gradient(left, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* For Opera 11.1 to 12.0 */
+  background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-gradient(linear, right, left, from(rgba(0, 0, 0, 0.18)), to(rgba(0, 0, 0, 0)));
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: width;
+  -moz-transition-property: width;
+  -o-transition-property: width;
+  -ms-transition-property: width;
+  -webkit-transition-property: width;
+  overflow: hidden;
+}
+#magazine .shadow_rotator {
+  position: absolute;
+  width: 100%;
+  height: 164%;
+  transform-origin: 0 0;
+  transform: translate(82%, 0) rotate(-32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(82%, 0) rotate(-32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(82%, 0) rotate(-32deg);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin, display;
+  -moz-transition-property: transform, transform-origin, display;
+  -o-transition-property: transform, transform-origin, display;
+  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+}
+#magazine .shadow_rotator .shadow_gradient {
+  width: 5%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* Standard syntax */
+  background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* For Firefox 3.6 to 15 */
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* For Opera 11.1 to 12.0 */
+  background: -ms-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-gradient(linear, left, right, from(rgba(0, 0, 0, 0.18)), to(rgba(0, 0, 0, 0)));
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: width;
+  -moz-transition-property: width;
+  -o-transition-property: width;
+  -ms-transition-property: width;
+  -webkit-transition-property: width;
+  overflow: hidden;
+}
+#magazine .shadow_rotator .shadow_opacity {
+  opacity: 1;
+  transition-duration: 1s;
+  -ms-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+}
+#magazine .flip_left .rp_shadow_rotator {
+  transform-origin: 0 0;
+  transform: translate(0, 0) rotate(0deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(0, 0) rotate(0deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(0, 0) rotate(0deg);
+}
+#magazine .flip_left .rp_shadow_gradient {
+  width: 3%;
+}
+#magazine .flip_left .shadow_opacity {
+  opacity: 0;
+}
+#magazine .flip_left .shadow_rotator {
+  transform-origin: 0 0;
+  transform: translate(-5%, 0) rotate(0deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(-5%, 0) rotate(0deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(-5%, 0) rotate(0deg);
+}
+#magazine .flip_left .right_page_rotator {
+  transform-origin: 80% 13%;
+  transform: translate(-110%, 0) rotate(0deg);
+  -ms-transform-origin: 80% 13%;
+  -ms-transform: translate(-110%, 0) rotate(0deg);
+  -webkit-transform-origin: 80% 13%;
+  -webkit-transform: translate(-110%, 0) rotate(0deg);
+}
+#magazine .flip_left .right_page_holder > div.right_page {
+  transform-origin: 3% 0;
+  transform: translate(110%, 0) rotate(0deg);
+  -ms-transform-origin: 3% 0;
+  -ms-transform: translate(110%, 0) rotate(0deg);
+  -webkit-transform-origin: 3% 0;
+  -webkit-transform: translate(110%, 0) rotate(0deg);
+}
+#magazine .flip_left .left_page_rotator {
+  transform-origin: 80% 13%;
+  transform: translate(-110%, 0) rotate(0deg);
+  -ms-transform-origin: 80% 13%;
+  -ms-transform: translate(-110%, 0) rotate(0deg);
+  -webkit-transform-origin: 80% 13%;
+  -webkit-transform: translate(-110%, 0) rotate(0deg);
+}
+#magazine .flip_left .left_page_holder > div.left_page {
+  transform-origin: 0 0;
+  transform: translate(10.7%, 0) rotate(0deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(10.7%, 0) rotate(0deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(10.7%, 0) rotate(0deg);
+}
+#magazine .flip_left .flip_corner {
+  transform-origin: 0 0;
+  transform: translate(-747.2307692307693%, -53%) rotate(32deg);
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(-747.2307692307693%, -53%) rotate(32deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(-747.2307692307693%, -53%) rotate(32deg);
+}
+#magazine .flip_left .on_left .shadow_holder {
+  width: 0;
+}
+#magazine .flip_left.on_left .rp_shadow_gradient {
+  width: 0;
+}
+#magazine #magazineIndex {
+  -webkit-box-sizing: padding-box;
+  -moz-box-sizing: padding-box;
+  box-sizing: padding-box;
+  padding: 2% 7%;
+  width: 100%;
+  margin: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
+}
+#magazine #magazineIndex img {
+  width: 35px;
+  margin-right: 15px;
+}
+#magazine #magazineIndex ul {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+#magazine #magazineIndex ul > li {
+  position: relative;
+  display: block;
+}
+#magazine #magazineIndex ul > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+#magazine #magazineIndex ul > li > a:hover,
+#magazine #magazineIndex ul > li > a:focus {
+  text-decoration: none;
+  background-color: #555555;
+}
+#magazine #magazineIndex ul > li > a > img {
+  max-width: none;
+}
+#magazine #magazineIndex .pills > li {
+  float: left;
+}
+#magazine #magazineIndex .pills > li > a {
+  border-radius: 0;
+}
+#magazine #magazineIndex .pills > li + li {
+  margin-left: 2px;
+}
+#magazine #magazineIndex .pills > li.active > a,
+#magazine #magazineIndex .pills > li.active > a:hover,
+#magazine #magazineIndex .pills > li.active > a:focus {
+  color: #942524;
+  background-color: #555555;
+}
+#magazine #magazineIndex .stacked > li {
+  float: none;
+}
+#magazine #magazineIndex .stacked > li + li {
+  margin-top: 2px;
+  margin-left: 0;
+}
+#magazine #magazineIndex .justified {
+  width: 100%;
+}
+#magazine #magazineIndex .justified > li {
+  float: none;
+}
+#magazine #magazineIndex .justified > li > a {
+  text-align: center;
+  margin-bottom: 5px;
+}
+#magazine #magazineIndex .justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+@media (min-width: 768px) {
+  #magazine #magazineIndex .justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+  #magazine #magazineIndex .justified > li > a {
+    margin-bottom: 0;
+  }
+}

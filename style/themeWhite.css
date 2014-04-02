@@ -1,0 +1,48 @@
+/*!
+Author: Diana De Vargas for We Are Social Australia
+Author URI: http://wearesocial.net/
+Version: 1.0
+*/
+/*!**************************************************************************
+*
+* NB. DO NOT EDIT THE CONTENTS OF THIS CSS FILE DIRECTLY!
+* All CSS has been compiled from LESS Dynamic Stylesheets and minified
+* using CodeKit. Any style changes must be made to the original LESS files
+* then recompiled to CSS, otherwise your changes will likely be overwritten.
+*
+* For more info see http://lesscss.org/ and http://incident57.com/codekit/
+*
+****************************************************************************/
+/*!
+Author: Diana De Vargas for We Are Social Australia
+Author URI: http://wearesocial.net/
+Version: 1.0
+*/
+body {
+  padding: 0;
+  margin: 0;
+  background: #ffffff;
+  color: #303030;
+}
+#magazineHeader {
+  height: 50px;
+  overflow: visible;
+  z-index: 1000;
+}
+#magazineHeader .ui-menu {
+  width: 200px;
+}
+.desk {
+  background: #ffffff;
+}
+#magazine .magazine_help {
+  border-color: #c2c2c2;
+}
+#magazine .right_page_holder > div.right_page {
+  background: #ffffff;
+  border: 1px solid #c2c2c2;
+}
+#magazine .left_page_holder > div.left_page {
+  background: #ffffff;
+  border: 1px solid #c2c2c2;
+}
