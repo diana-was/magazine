@@ -66,7 +66,7 @@
 
 .quick-gradient (@origin: left; @alpha: 0.2) {
     background-image: linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
-	background-image: -moz-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -moz-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
     background-image: -o-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
     background-image: -ms-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
     background-image: -webkit-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
@@ -172,6 +172,18 @@
     -o-transition-property: margin;         // Opera
     -ms-transition-property: margin;        //IE
     -webkit-transition-property: margin;    // Safari 
+}
+
+.showcorner-left-page (@t:1s;@f:easy-in-out;@d:0){
+    .transition-duration(@t);
+    .transition-timing-function(@f);
+    .transition-delay(@d);
+
+    transition-property: border-top-left-radius;
+    -moz-transition-property: border-top-left-radius;        // Firefox 4 
+    -o-transition-property: border-top-left-radius;          // Opera
+    -ms-transition-property: border-top-left-radius;         //IE
+    -webkit-transition-property: border-top-left-radius;     // Safari 
 }
 
 .right-page-flip(@x;@y;@deg;@t:1s) {

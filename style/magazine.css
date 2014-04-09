@@ -18,10 +18,18 @@ Author: Diana De Vargas for We Are Social Australia
 Author URI: http://wearesocial.net/
 Version: 1.0
 */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 #viewZone {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
   height: auto;
   position: relative;
   margin-left: auto;
@@ -41,30 +49,32 @@ Version: 1.0
 .desk:before {
   content: "";
   display: block;
-  padding-top: 34%;
-  /* initial ratio of 3:4*/
+  padding-top: 33%;
 }
 .desk .magazine_help {
+  z-index: 10;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  top: 45%;
+  min-width: 100px;
+  width: 20%;
+  border: 1px solid;
+  padding: 0;
+  margin: 0 65% 0 15%;
+}
+.desk #imageHolder {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  z-index: 10;
-  position: absolute;
-  min-width: 100px;
-  width: 20%;
-  top: 45%;
-  left: 12.5%;
-  border: 1px solid;
-  padding: 10px;
-  margin: 0px;
-}
-.desk #imageHolder {
   position: absolute;
   top: 0px;
   left: 0px;
-  bottom: 0px;
-  right: 0px;
-  padding: 1% 2%;
+  width: 98%;
+  height: 98%;
+  padding: 1% 1%;
+  margin: 0;
   background: url("../images/book-front-cover.png") 0 0 no-repeat;
   background-size: cover;
 }
@@ -74,12 +84,15 @@ Version: 1.0
   height: 100%;
 }
 .desk #imageHolder #magazineHolder #magazine {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   position: relative;
   width: 100%;
   height: 100%;
 }
 .desk #imageHolder.openBook {
-  background-image: url("../images/book-open.jpg");
+  background-image: url("../images/book-open.png");
 }
 .desk #imageHolder.finishBook {
   background-image: url("../images/book-back-cover.png");
@@ -177,6 +190,10 @@ Version: 1.0
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 0 0 123% 0;
+  border: 1px solid #c2c2c2;
+}
+#magazine .right_page_holder > div.right_page.front_cover {
+  border: none;
 }
 #magazine .right_page_holder > div.right_page [data-type="double"] {
   width: 200%!important;
@@ -204,12 +221,7 @@ Version: 1.0
   width: 13%;
   height: 24%;
   position: absolute;
-  transform-origin: 0 0;
-  transform: translate(651%, 0) rotate(-32deg);
-  -ms-transform-origin: 0 0;
-  -ms-transform: translate(651%, 0) rotate(-32deg);
-  -webkit-transform-origin: 0 0;
-  -webkit-transform: translate(651%, 0) rotate(-32deg);
+  right: 0;
   overflow: visible;
 }
 #magazine .flip_corner.active {
@@ -277,6 +289,10 @@ Version: 1.0
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 0 0 123% 0;
+  border: 1px solid #c2c2c2;
+}
+#magazine .left_page_holder > div.left_page.back_cover {
+  border: none;
 }
 #magazine .left_page_holder > div.left_page [data-type="double"] {
   width: 200%!important;
@@ -480,25 +496,38 @@ Version: 1.0
 }
 #magazine .flip_left .left_page_holder > div.left_page {
   transform-origin: 0 0;
-  transform: translate(10.7%, 0) rotate(0deg);
+  transform: translate(10%, 0) rotate(0deg);
   -ms-transform-origin: 0 0;
-  -ms-transform: translate(10.7%, 0) rotate(0deg);
+  -ms-transform: translate(10%, 0) rotate(0deg);
   -webkit-transform-origin: 0 0;
-  -webkit-transform: translate(10.7%, 0) rotate(0deg);
+  -webkit-transform: translate(10%, 0) rotate(0deg);
 }
 #magazine .flip_left .flip_corner {
-  transform-origin: 0 0;
-  transform: translate(-747.2307692307693%, -53%) rotate(32deg);
-  -ms-transform-origin: 0 0;
-  -ms-transform: translate(-747.2307692307693%, -53%) rotate(32deg);
-  -webkit-transform-origin: 0 0;
-  -webkit-transform: translate(-747.2307692307693%, -53%) rotate(32deg);
+  right: auto;
+  left: -100%;
 }
-#magazine .flip_left .on_left .shadow_holder {
+#magazine .flip_left.on_left .shadow_holder {
   width: 0;
 }
 #magazine .flip_left.on_left .rp_shadow_gradient {
   width: 0;
+}
+#magazine .show_corner.on_left div.left_page {
+  transition-duration: 1s;
+  -ms-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: border-top-left-radius;
+  -moz-transition-property: border-top-left-radius;
+  -o-transition-property: border-top-left-radius;
+  -ms-transition-property: border-top-left-radius;
+  -webkit-transition-property: border-top-left-radius;
+  border-top-left-radius: 13% 24%;
 }
 #magazine #magazineIndex {
   -webkit-box-sizing: padding-box;
@@ -510,7 +539,7 @@ Version: 1.0
   display: block;
   margin-left: auto;
   margin-right: auto;
-  color: #ffffff;
+  color: #000000;
 }
 #magazine #magazineIndex img {
   width: 35px;
@@ -533,7 +562,7 @@ Version: 1.0
 #magazine #magazineIndex ul > li > a:hover,
 #magazine #magazineIndex ul > li > a:focus {
   text-decoration: none;
-  background-color: #555555;
+  background-color: #c2c2c2;
 }
 #magazine #magazineIndex ul > li > a > img {
   max-width: none;
@@ -551,7 +580,7 @@ Version: 1.0
 #magazine #magazineIndex .pills > li.active > a:hover,
 #magazine #magazineIndex .pills > li.active > a:focus {
   color: #942524;
-  background-color: #555555;
+  background-color: #c2c2c2;
 }
 #magazine #magazineIndex .stacked > li {
   float: none;

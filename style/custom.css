@@ -218,25 +218,12 @@ td,
 th {
   padding: 0;
 }
-/* line 11, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-/* line 14, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-/* line 22, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 8, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-/* line 27, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 13, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
@@ -244,7 +231,7 @@ body {
   color: #222222;
   background-color: #ffffff;
 }
-/* line 36, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 22, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 input,
 button,
 select,
@@ -253,32 +240,32 @@ textarea {
   font-size: inherit;
   line-height: inherit;
 }
-/* line 48, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 34, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 a {
   color: #222222;
   text-decoration: none;
 }
-/* line 52, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 38, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 a:hover,
 a:focus {
   color: #000000;
   text-decoration: underline;
 }
-/* line 58, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 44, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 a:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-/* line 69, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 55, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 figure {
   margin: 0;
 }
-/* line 76, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 62, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 img {
   vertical-align: middle;
 }
-/* line 81, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 67, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 .img-responsive,
 .thumbnail > img,
 .thumbnail a > img {
@@ -286,11 +273,11 @@ img {
   max-width: 100%;
   height: auto;
 }
-/* line 86, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 72, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 .img-rounded {
   border-radius: 6px;
 }
-/* line 93, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 79, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 .img-thumbnail {
   padding: 4px;
   line-height: 1.428571429;
@@ -303,18 +290,18 @@ img {
   max-width: 100%;
   height: auto;
 }
-/* line 106, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 92, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 .img-circle {
   border-radius: 50%;
 }
-/* line 113, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 99, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 hr {
   margin-top: 21px;
   margin-bottom: 21px;
   border: 0;
   border-top: 1px solid #eeeeee;
 }
-/* line 125, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/scaffolding.less */
+/* line 111, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/_scaffolding-custom.less */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -5017,53 +5004,65 @@ button.close {
 .navbar-inverse .navbar-link:hover {
   color: #ffffff;
 }
-/* line 53, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 54, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 body {
   overflow-x: hidden;
   overflow-y: auto;
 }
 /* line 59, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#test {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #000000;
+  background: #ff0000;
+}
+/* line 70, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .btn {
   text-transform: uppercase;
 }
-/* line 62, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 73, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .btn.disabled,
 .btn[disabled],
 fieldset[disabled] .btn {
   opacity: 0.2;
   filter: alpha(opacity=20);
 }
-/* line 72, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 83, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .btn-menu {
   padding: 8px 8px;
   font-size: 32px;
   line-height: 1.1;
   border-radius: 0;
 }
-/* line 76, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 87, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .btn-menu .glyphicon {
   margin-right: 5px;
   margin-left: 5px;
   line-height: 1.1;
 }
-/* line 82, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 93, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .btn-menu p {
   margin: 0;
   font-size: 10px;
 }
-/* line 89, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 100, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 p,
 ul,
 ol {
   font-weight: 400;
 }
-/* line 93, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 104, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 p strong,
 ul strong,
 ol strong {
   font-weight: bold;
 }
-/* line 96, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 107, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 h1,
 h2,
 h3,
@@ -5080,7 +5079,7 @@ h6,
   font-weight: 400;
   font-family: "Yanone Kaffeesatz", sans-serif;
 }
-/* line 105, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 116, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .spr {
   background-image: url("../images/sprite.png");
 }
@@ -5091,24 +5090,24 @@ h6,
     background-size: 1000px 710px;
   }
 }
-/* line 107, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 118, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 .magazine_help {
   color: #999999;
   border-color: #999999;
 }
-/* line 132, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 143, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 html,
 body {
   position: relative;
   -webkit-font-smoothing: antialiased;
 }
-/* line 138, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineContainer {
+/* line 149, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection {
   margin: 0;
   position: relative;
 }
-/* line 144, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-.magazine-header {
+/* line 154, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection .magazine-header {
   background-color: #222222;
   color: #ffffff;
   width: 100%;
@@ -5118,99 +5117,105 @@ body {
   min-height: 68px;
   margin: 0 0 0 0;
 }
-/* line 162, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-.magazine-header #logo {
+/* line 172, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection .magazine-header #logo {
   padding-left: 45%;
 }
-/* line 166, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-.magazine-header .btn-link {
+/* line 176, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection .magazine-header .btn-link {
   color: #eeeeee;
 }
-/* line 168, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-.magazine-header .btn-link:hover,
-.magazine-header .btn-link:focus {
+/* line 178, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection .magazine-header .btn-link:hover,
+#magazineSection .magazine-header .btn-link:focus {
   color: #c8c8c8;
 }
-/* line 175, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineBody {
+/* line 185, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #bodyColumn {
+  padding: 0 5px;
+}
+/* line 187, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #bodyColumn #magazineBody {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   margin: 2% auto;
   padding: 0;
 }
-/* line 181, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineFooter {
-  background-color: #222222;
+/* line 194, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #footerColumn {
+  -webkit-box-sizing: padding-box;
+  -moz-box-sizing: padding-box;
+  box-sizing: padding-box;
   color: #ffffff;
-  width: 100%;
-  overflow: visible;
-  padding: 0.5em 2%;
+  background-color: #222222;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5em 2em;
   z-index: 1;
 }
-/* line 190, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-.desk {
+/* line 208, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection .desk {
   background: #ffffff;
 }
-/* line 194, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine {
+/* line 212, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine {
   color: #222222;
 }
-/* line 196, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine .magazine_help {
+/* line 214, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine .magazine_help {
   border-color: #c2c2c2;
 }
-/* line 208, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine .right_page_holder > div.right_page {
+/* line 226, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine .right_page_holder > div.right_page {
   background: #ffffff;
 }
-/* line 223, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine .left_page_holder > div.left_page {
+/* line 240, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine .left_page_holder > div.left_page {
   background: #ffffff;
-}
-/* line 229, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine div [data-title='endpaper'] {
-  width: 100%;
-  height: 100%;
-  border: 1px solid #c2c2c2;
-}
-/* line 235, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex {
-  height: 100%;
-}
-/* line 238, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex > h3 {
-  text-align: center;
-}
-/* line 242, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex > ul {
-  display: block;
 }
 /* line 245, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex > ul a {
-  color: #ffffff;
+#magazineSection #magazine div [data-type='endpaper'],
+#magazineSection #magazine div [data-type='frontflap'],
+#magazineSection #magazine div [data-type='backflap'] {
+  width: 100%;
+  height: 100%;
 }
-/* line 247, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex > ul a:hover,
-#magazine #magazineIndex > ul a:focus {
+/* line 252, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex {
+  height: 100%;
+}
+/* line 255, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex > h3 {
+  text-align: center;
+}
+/* line 259, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex > ul {
+  display: block;
+}
+/* line 263, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex > ul a:hover,
+#magazineSection #magazine #magazineIndex > ul a:focus {
   color: #eeeeee;
   background-color: #222222;
 }
-/* line 253, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex > ul a span.pagenumber {
+/* line 269, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex > ul a span.pagenumber {
   float: right;
 }
-/* line 259, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex img {
+/* line 275, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex img {
   width: 15%;
 }
-/* line 263, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex .nav-pills > li > a {
+/* line 279, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex .nav-pills > li > a {
   border-radius: 0;
 }
-/* line 265, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazine #magazineIndex .nav-pills > li > a:active,
-#magazine #magazineIndex .nav-pills > li > a.active {
+/* line 281, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+#magazineSection #magazine #magazineIndex .nav-pills > li > a:active,
+#magazineSection #magazine #magazineIndex .nav-pills > li > a.active {
   border-color: #222222;
 }
 /* line 20, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/mixins.less */
@@ -5236,8 +5241,8 @@ body {
 .navbar-header:after,
 .navbar-collapse:before,
 .navbar-collapse:after,
-.magazine-header:before,
-.magazine-header:after {
+#magazineSection .magazine-header:before,
+#magazineSection .magazine-header:after {
   content: " ";
   display: table;
 }
@@ -5253,7 +5258,7 @@ body {
 .navbar:after,
 .navbar-header:after,
 .navbar-collapse:after,
-.magazine-header:after {
+#magazineSection .magazine-header:after {
   clear: both;
 }
 /* line 12, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less-bootstrap-3.1.1/utilities.less */

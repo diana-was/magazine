@@ -4,7 +4,7 @@
 @white:     #ffffff;
 @red:       #942524;
 @black:     #000;
-@gray:      #555;
+@gray:      #c2c2c2;
 
 // opacities
 @black-0    : rgba(0,0,0,0);
@@ -16,7 +16,7 @@
 
 // Scaffolding
 // -------------------------
-@bodyBackground:        @black;
+@bodyBackground:        @white;
 @textColor:             @gray;
 
 // Typography
@@ -32,7 +32,7 @@
 @headingsFontWeight:    bold;    // instead of browser default, bold
 @headingsColor:         inherit; // empty to use BS default, @textColor
 
-@nav-link-color:        @white;
+@nav-link-color:        @black;
 @nav-link-hover-color:  @red;     
 @nav-link-hover-bg:     @gray;     
 @nav-link-padding:      10px 15px;;
@@ -42,12 +42,13 @@
 @ratio          : 2/3;  //2/3; //4/3; // 3:4
 @viewZone       : 100%;
 @magWidth       : 50%;
-@magMargin      : 2%;
+@magMargin      : 1%;
 @magGutter      : 3%;
 @flipTimer      : 2s;
 @flipDeg        : 32deg;
 @shadowWidth    : 3%;
 @shadowAlpha    : 0.5;
+@lefPageFlip    : 10%;
 
 // calculated Variables -- Do NOT change
 // -------------------------
@@ -111,5 +112,5 @@
 //images
 @cover :                    "@{image-path}book-front-cover.png";
 @backCover :                "@{image-path}book-back-cover.png";
-@dustJacket :               "@{image-path}book-open.jpg";
+@dustJacket :               "@{image-path}book-open.png";
 
