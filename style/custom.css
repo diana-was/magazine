@@ -5169,11 +5169,11 @@ body {
   border-color: #c2c2c2;
 }
 /* line 226, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineSection #magazine .right_page_holder > div.right_page {
+#magazineSection #magazine .right_page_holder > div.right_page [data-type] {
   background: #ffffff;
 }
 /* line 240, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineSection #magazine .left_page_holder > div.left_page {
+#magazineSection #magazine .left_page_holder > div.left_page [data-type] {
   background: #ffffff;
 }
 /* line 245, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
@@ -5185,7 +5185,7 @@ body {
 }
 /* line 252, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex {
-  height: 100%;
+  height: auto;
 }
 /* line 255, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex > h3 {

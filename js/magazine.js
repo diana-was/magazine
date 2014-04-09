@@ -307,7 +307,7 @@
                 attachPage($('<div data-title="Cover" data-type="frontcover"></div>'), $lastLeaf, 'r');
             }
             attachPage($('<div data-title="" data-type="frontflap"></div>'), $lastLeaf, 'l');
-            $lastLeaf.find('.right_page').addClass('front_cover');
+            $lastLeaf.addClass('front_cover');
             
             // blank leaf
             $lastLeaf = createLeaf();
@@ -376,7 +376,7 @@
                 attachPage($('<div data-title="Back Cover" data-type="backcover"></div>'), $lastLeaf, 'l');
             }
             lastLeafNo = $lastLeaf.data('leaf');
-            $lastLeaf.find('.left_page').addClass('back_cover');
+            $lastLeaf.addClass('back_cover');
 
             // no show last page shadow
             var lastShadow = (lastLeafNo > 1)?lastLeafNo - 1:1;
@@ -613,7 +613,7 @@
         _getIndex = function() {
             var index = [],
                 i = 0,
-                noIndexed = ['content','frontflap','backflap','endpaper','frontcover','backcover'];
+                noIndexed = ['content','frontflap','backflap','endpaper'];
             if ($magazine !== null) {
                 $magazine.find('div[data-page]').each(function(){
                     var $this = $(this);

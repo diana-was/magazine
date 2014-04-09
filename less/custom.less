@@ -223,7 +223,7 @@ body {
         // |          |          |
         // -----------------------
         .right_page_holder {
-            > div.right_page {
+            > div.right_page [data-type]{
                 background: @mag-bg;
             }
         }
@@ -237,7 +237,7 @@ body {
         // |          |          |
         // -----------------------
         .left_page_holder {
-            > div.left_page {
+            > div.left_page  [data-type]{
                 background: @mag-bg;
             }
         }
@@ -250,7 +250,7 @@ body {
         }
         
         #magazineIndex {
-            height: 100%;
+            height: auto;
             
             > h3 {
                 text-align: center;
