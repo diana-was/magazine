@@ -43,15 +43,15 @@ Version: 1.0
     }
 
     .magazine_help {
-       z-index : 10;
+       //z-index : 10;
        .box-sizing(border-box); 
        position: absolute;
        top: 45%;
        min-width : 100px;
        width: 20%;
        border: 1px solid;
-       padding: 0;
-       margin: 0 65% 0 15%;
+       padding: 1em;
+       margin: 0 auto 0 15%;
     }
     
     #imageHolder {
@@ -117,7 +117,21 @@ Version: 1.0
         }
         
     }
-
+    
+    &.book {
+        .hard_cover.show_corner {
+            .hard_cover_rotator {
+                .rotate-page(10deg,0,0,visible);
+            }
+        }
+        
+        .hard_cover.flip_left.show_corner {
+            .hard_cover_rotator {
+                .rotate-page(170deg,0,0,visible);
+            }
+        }
+    }
+    
     // Front page - right page
     // -----------------------
     // |          |          |
@@ -168,10 +182,11 @@ Version: 1.0
             overflow-y: scroll;
             overflow-x: hidden;
             margin : 0 0 @magPageMargin 0;
-            padding: @magMarginH @magMargin  @magMarginH 0;
+            padding: 0;
             
             [data-type] {
                 border: 1px solid @gray;
+                background: @bodyBackground;
             }
             
             [data-type="double"] {
@@ -196,28 +211,6 @@ Version: 1.0
                 left: 0;
             }
         }
-    }
-    
-    // corner to flip the page
-    // makes the left page visible
-    // ----------------------  here
-    // |          |       |__| 
-    // |          |          |
-    // |          |          |
-    // |          |          |
-    // |          |          |
-    // -----------------------
-    .flip_corner {
-            width: @flipWidth;
-            height: @flipHeight;
-            position: absolute;
-            //.flip(@flipLpX, 0, (-1*@flipDeg), 0, 0);
-            right:0;
-            overflow: visible;
-            
-            &.active {
-                display: none;
-            }
     }
 
     // left page
@@ -275,10 +268,11 @@ Version: 1.0
             overflow-y: scroll;
             overflow-x: hidden;
             margin : 0 0 @magPageMargin 0;
-            padding: @magMarginH 0  @magMarginH @magMargin;
+            padding: 0;
             
             [data-type] {
                 border: 1px solid @gray;
+                background: @bodyBackground;
             }
             
             [data-type="double"] {
@@ -303,61 +297,29 @@ Version: 1.0
         }
         
     }
- 
-    .front_cover {
-        div.right_page {
-            border: none;
-            padding: @magMarginH @magMargin;
-            background: url(@frontCover) 0 0 no-repeat;
-            background-size: cover;
+    
+    
+    // corner to flip the page
+    // makes the left page visible
+    // ----------------------  here
+    // |          |       |__| 
+    // |          |          |
+    // |          |          |
+    // |          |          |
+    // |          |          |
+    // -----------------------
+    .flip_corner {
+            width: @flipWidth;
+            height: @flipHeight;
+            position: absolute;
+            right:0;
+            overflow: visible;
             
-            [data-type] {
-                border: none;
+            &.active {
+                display: none;
             }
-        }
-        
-        div.left_page {
-            border: none;
-            padding: @magMarginH @magMargin;
-            background: url(@frontDustJacket) 0 0 no-repeat;
-            background-size: cover;
-            
-            [data-type] {
-                border: none;
-                border-top-left-radius: 0!important;
-            }
-        }
     }
-    
-    .back_cover {
-        div.right_page {
-            border: none;
-            margin : 0;
-            padding: @magMarginH @magMargin;
-            background: url(@backDustJacket) 0 0 no-repeat;
-            background-size: cover;
-            
-            [data-type] {
-                border: none;
-            }
-        }
-        
-        div.left_page {
-            border: none;
-            margin : 0;
-            padding: @magMarginH @magMargin;
-            background: url(@backCover) 0 0 no-repeat;
-            background-size: cover;
-            
-            [data-type] {
-                border: none;
-                border-top-left-radius: 0!important;
-            }
-        }
-    
-    }
-    
-    
+
     // shadow
     //          ||           /
     //          ||           \
@@ -455,7 +417,186 @@ Version: 1.0
     }
 
 
+    &.book {
+        .right_page_holder {
+            > div.right_page {
+                padding: @magMarginH @magMargin  @magMarginH 0;
+            }
+        }
+        .left_page_holder {
+            > div.left_page {
+                padding: @magMarginH 0  @magMarginH @magMargin;
+            }
+        }
+
+        .hard_cover  {
+            .hard_cover_rotator{
+                width: @magInWidth;
+                height: @magInHeight;
+                position: absolute;
+                .rotate-perspective(500);
+            }
+            
+            .right_cover_holder {
+                //              /  \
+                // ---------- /      \
+                // |        /          \    
+                // |         \          /|
+                // |  gives th\e size /  |
+                // |  the overf\low  /   |
+                // |  cuts the  \co /rner|
+                // ----------------------
+                width: @magInWidth;
+                height: @magInHeight;
+                position: absolute;
+                .rotate-visibility(hidden);
+        
+                > div.right_page {
+                    //            ---------\
+                    //            |         \ 
+                    //            |          |
+                    //            |   the    |
+                    //            | image    |
+                    //            |          |
+                    //            ------------
+                    position: relative;
+                    border: none;
+                    width: @magInWidth;
+                    height: @magInHeight;
+                    overflow: hidden;
+                    margin : 0;
+                    padding: @magMarginH @magMargin;
+                    background: 0 0 no-repeat @bodyBackground;
+                    background-size: cover;
+                    
+                    [data-type] {
+                        border: none;
+                        background: @bodyBackground;
+                    }
+                    
+                    > div.right_page_gradient {
+                        //            -
+                        //            | 
+                        //            |
+                        //            |  <- this shadow 
+                        //            | 
+                        //            | 
+                        //            -
+                        width: @magGutter;
+                        height: @magInHeight;
+                        .bg-gradient(right, left, @black-15, @black-0);
+                        position: absolute;
+                        top : 0;
+                        left: 0;
+                    }
+                }
+            }
+        
+            .left_cover_holder {
+                //              /  \
+                // ---------- /      \
+                // |        /          \    
+                // |         \          /|
+                // |  gives th\e size /  |
+                // |  for the p\age  /   |
+                // |  to flip    \ /     |
+                // ----------------------
+                width: @magInWidth;
+                height: @magInHeight;
+                position: absolute;
+                .rotate-page(180deg,50%,50%,visible);
+        
+                > div.left_page {
+                    //                \  here is the image 
+                    //                 \
+                    //                  \    /
+                    // ------------------\  /
+                    // |                  \/ | 
+                    // |   makes the         |
+                    // |   corner and holds  |
+                    // |   the image         |
+                    // |                     |
+                    // -----------------------
+                    border: none;
+                    .box-shadow (0, 0, @shadowWidth, @shadowAlpha);
+                    position: relative;
+                    width: @magInWidth;
+                    height: @magInHeight;
+                    overflow: hidden;
+                    margin : 0;
+                    padding: @magMarginH @magMargin;
+                    background: 0 0 no-repeat @bodyBackground;
+                    background-size: cover;
+                    
+                    [data-type] {
+                        border: none;
+                    }
+                    
+                    > div.left_page_gradient {
+                        //            -
+                        //            | 
+                        //            |
+                        //            |  <- this shadow 
+                        //            | 
+                        //            | 
+                        //            -
+                        width: @magGutter;
+                        height: @magInHeight;
+                        .bg-gradient(left, right,  @black-15,  @black-0);
+                        position: absolute;
+                        top : 0;
+                        right: 0;
+                    }
+                }
+                
+            }
+            
+            .flip_corner {
+                .z-pixel();
+                height: 100%;
+            }
+            
+        }
     
+        .front_cover {
+             .hard_cover_rotator {
+                .open-close-book(0,0,0,@flipTimer,visible,1px);  //for safari
+            } 
+            .right_cover_holder {
+                div.right_page {
+                    background-image: url(@frontCover);
+                }
+            }
+            
+            .left_cover_holder {
+                div.left_page {
+                    background-image: url(@frontDustJacket);
+                }
+            }
+    
+        }
+        
+        .back_cover {
+            .hard_cover_rotator {
+                .open-close-book(0,0,0,@flipTimer,visible,-1px);  //for safari
+            } 
+            .right_cover_holder {
+                div.right_page {
+                    background-image: url(@backDustJacket);
+                }
+            }
+            
+            .left_cover_holder {
+                div.left_page {
+                    background-image: url(@backCover);
+                }
+            }
+    
+        }
+    }
+    
+    
+        
     .flip_left {
         //          ||           \\
         //          ||            \\
@@ -538,12 +679,25 @@ Version: 1.0
         }
         
         .flip_corner {
-           //.flip(@flipLpRevShadowX, @flipLpRevShadowY, @flipDeg, 0, 0);
            right:auto;
            left: -@magInWidth;
         }
+        
     }
 
+    &.book {
+        .front_cover.flip_left {
+            .hard_cover_rotator {
+                .rotate-page(180deg,0,0,visible);  //for safari
+            }
+        }
+        .back_cover.flip_left {
+            .hard_cover_rotator {
+                .rotate-page(180deg,0,0,visible,-1px);  //for safari
+            } 
+        }
+    }
+    
     .flip_left.on_left {
         .shadow_holder {
             width   : 0;

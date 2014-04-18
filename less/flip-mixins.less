@@ -118,6 +118,38 @@
     -webkit-transform: translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y); // Safari and Chrome
 }
 
+.rotate-perspective(@v) {
+    -webkit-perspective: @v;
+    perspective: @v;
+}
+
+.rotate-visibility(@v) {
+    -webkit-backface-visibility:@v; /* Chrome, Safari, Opera */
+    backface-visibility:@v;
+}
+
+.rotate-preserve() {
+    -webkit-transform-style: preserve-3d; /* Chrome, Safari, Opera */
+    transform-style: preserve-3d;
+}
+
+.z-pixel(@z:1px) {
+    -webkit-transform: translateZ(@z);
+    transform: translateZ(@z);
+}
+
+.rotate-page(@dg;@x:50%;@y:50%;@v:hidden;@z:1px) {
+    transform-origin:@x @y;
+    -ms-transform-origin:@x @y; /* IE 9 */
+    -webkit-transform-origin:@x @y; /* Safari and Chrome */
+
+    .rotate-preserve();
+    .rotate-visibility(@v);
+
+    -webkit-transform: rotateY(@dg) translateZ(@z); /* Chrome, Safari, Opera */
+    transform: rotateY(@dg) translateZ(@z);
+}
+
 .transition-duration (@t:1s){
     transition-duration: @t;
     -ms-transition-duration: @t;
@@ -142,12 +174,11 @@
     .transition-timing-function(@f);
     .transition-delay(@d);
 
-    transition-property: transform,  transform-origin, display;
-    -moz-transition-property: transform,  transform-origin, display;
-    -o-transition-property: transform,  transform-origin, display;
-    -ms-transition-property: -ms-transform, -ms-transform-origin, display;               // IE
-    -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;   // Safari 
-    
+    transition-property: transform,  transform-origin;
+    -moz-transition-property: transform,  transform-origin;
+    -o-transition-property: transform,  transform-origin;
+    -ms-transition-property: -ms-transform, -ms-transform-origin;               // IE
+    -webkit-transition-property: -webkit-transform, -webkit-transform-origin;   // Safari 
 }
 
 .widden-page (@t:1s;@f:easy-in-out;@d:0){
@@ -189,5 +220,11 @@
 .right-page-flip(@x;@y;@deg;@t:1s) {
     position: absolute;
     .flip(@x , @y, (@deg * -1), 0, 0);
+    .flip-page(@t);
+}
+
+.open-close-book(@x;@y;@deg;@t:1s;@v:hidden;@z:1px) {
+    position: absolute;
+    .rotate-page(@deg,@x,@y,@v,@z);
     .flip-page(@t);
 }

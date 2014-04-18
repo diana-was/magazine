@@ -52,7 +52,6 @@ Version: 1.0
   padding-top: 33%;
 }
 .desk .magazine_help {
-  z-index: 10;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -61,8 +60,8 @@ Version: 1.0
   min-width: 100px;
   width: 20%;
   border: 1px solid;
-  padding: 0;
-  margin: 0 65% 0 15%;
+  padding: 1em;
+  margin: 0 auto 0 15%;
 }
 .desk #imageHolder {
   -webkit-box-sizing: content-box;
@@ -125,6 +124,38 @@ Version: 1.0
 #magazine .show_page .right_page_rotator {
   z-index: initial!important;
 }
+#magazine.book .hard_cover.show_corner .hard_cover_rotator {
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(10deg) translateZ(1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(10deg) translateZ(1px);
+}
+#magazine.book .hard_cover.flip_left.show_corner .hard_cover_rotator {
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(170deg) translateZ(1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(170deg) translateZ(1px);
+}
 #magazine .right_page_rotator {
   width: 100%;
   height: 100%;
@@ -144,11 +175,11 @@ Version: 1.0
   transition-delay: 0;
   -ms-transition-delay: 0;
   -webkit-transition-delay: 0;
-  transition-property: transform, transform-origin, display;
-  -moz-transition-property: transform, transform-origin, display;
-  -o-transition-property: transform, transform-origin, display;
-  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
-  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
 }
 #magazine .right_page_holder {
   width: 110%;
@@ -170,21 +201,22 @@ Version: 1.0
   transition-delay: 0;
   -ms-transition-delay: 0;
   -webkit-transition-delay: 0;
-  transition-property: transform, transform-origin, display;
-  -moz-transition-property: transform, transform-origin, display;
-  -o-transition-property: transform, transform-origin, display;
-  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
-  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
   position: relative;
   width: 91%;
   height: 61%;
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 0 0 123% 0;
-  padding: 1% 1% 1% 0;
+  padding: 0;
 }
 #magazine .right_page_holder > div.right_page [data-type] {
   border: 1px solid #c2c2c2;
+  background: #ffffff;
 }
 #magazine .right_page_holder > div.right_page [data-type="double"] {
   width: 200%!important;
@@ -208,16 +240,6 @@ Version: 1.0
   top: 0;
   left: 0;
 }
-#magazine .flip_corner {
-  width: 13%;
-  height: 24%;
-  position: absolute;
-  right: 0;
-  overflow: visible;
-}
-#magazine .flip_corner.active {
-  display: none;
-}
 #magazine .left_page_rotator {
   width: 100%;
   height: 100%;
@@ -237,11 +259,11 @@ Version: 1.0
   transition-delay: 0;
   -ms-transition-delay: 0;
   -webkit-transition-delay: 0;
-  transition-property: transform, transform-origin, display;
-  -moz-transition-property: transform, transform-origin, display;
-  -o-transition-property: transform, transform-origin, display;
-  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
-  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
 }
 #magazine .left_page_holder {
   width: 110%;
@@ -264,11 +286,11 @@ Version: 1.0
   transition-delay: 0;
   -ms-transition-delay: 0;
   -webkit-transition-delay: 0;
-  transition-property: transform, transform-origin, display;
-  -moz-transition-property: transform, transform-origin, display;
-  -o-transition-property: transform, transform-origin, display;
-  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
-  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
   box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
   -o-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
@@ -280,10 +302,11 @@ Version: 1.0
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 0 0 123% 0;
-  padding: 1% 0 1% 1%;
+  padding: 0;
 }
 #magazine .left_page_holder > div.left_page [data-type] {
   border: 1px solid #c2c2c2;
+  background: #ffffff;
 }
 #magazine .left_page_holder > div.left_page [data-type="double"] {
   width: 200%!important;
@@ -305,45 +328,15 @@ Version: 1.0
   top: 0;
   right: 0;
 }
-#magazine .front_cover div.right_page {
-  border: none;
-  padding: 1% 1%;
-  background: url("../images/book-front-cover.png") 0 0 no-repeat;
-  background-size: cover;
+#magazine .flip_corner {
+  width: 13%;
+  height: 24%;
+  position: absolute;
+  right: 0;
+  overflow: visible;
 }
-#magazine .front_cover div.right_page [data-type] {
-  border: none;
-}
-#magazine .front_cover div.left_page {
-  border: none;
-  padding: 1% 1%;
-  background: url("../images/book-front-dustjacket.png") 0 0 no-repeat;
-  background-size: cover;
-}
-#magazine .front_cover div.left_page [data-type] {
-  border: none;
-  border-top-left-radius: 0!important;
-}
-#magazine .back_cover div.right_page {
-  border: none;
-  margin: 0;
-  padding: 1% 1%;
-  background: url("../images/book-back-dustjacket.png") 0 0 no-repeat;
-  background-size: cover;
-}
-#magazine .back_cover div.right_page [data-type] {
-  border: none;
-}
-#magazine .back_cover div.left_page {
-  border: none;
-  margin: 0;
-  padding: 1% 1%;
-  background: url("../images/book-back-cover.png") 0 0 no-repeat;
-  background-size: cover;
-}
-#magazine .back_cover div.left_page [data-type] {
-  border: none;
-  border-top-left-radius: 0!important;
+#magazine .flip_corner.active {
+  display: none;
 }
 #magazine .shadow_holder {
   width: 100%;
@@ -384,11 +377,11 @@ Version: 1.0
   transition-delay: 0;
   -ms-transition-delay: 0;
   -webkit-transition-delay: 0;
-  transition-property: transform, transform-origin, display;
-  -moz-transition-property: transform, transform-origin, display;
-  -o-transition-property: transform, transform-origin, display;
-  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
-  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
 }
 #magazine .shadow_holder .rp_shadow_gradient {
   width: 10%;
@@ -438,11 +431,11 @@ Version: 1.0
   transition-delay: 0;
   -ms-transition-delay: 0;
   -webkit-transition-delay: 0;
-  transition-property: transform, transform-origin, display;
-  -moz-transition-property: transform, transform-origin, display;
-  -o-transition-property: transform, transform-origin, display;
-  -ms-transition-property: -ms-transform, -ms-transform-origin, display;
-  -webkit-transition-property: -webkit-transform, -webkit-transform-origin, display;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
 }
 #magazine .shadow_rotator .shadow_gradient {
   width: 5%;
@@ -478,6 +471,193 @@ Version: 1.0
   transition-duration: 1s;
   -ms-transition-duration: 1s;
   -webkit-transition-duration: 1s;
+}
+#magazine.book .right_page_holder > div.right_page {
+  padding: 1% 1% 1% 0;
+}
+#magazine.book .left_page_holder > div.left_page {
+  padding: 1% 0 1% 1%;
+}
+#magazine.book .hard_cover .hard_cover_rotator {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-perspective: 500;
+  perspective: 500;
+}
+#magazine.book .hard_cover .right_cover_holder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  /* Chrome, Safari, Opera */
+  backface-visibility: hidden;
+}
+#magazine.book .hard_cover .right_cover_holder > div.right_page {
+  position: relative;
+  border: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 1% 1%;
+  background: 0 0 no-repeat #ffffff;
+  background-size: cover;
+}
+#magazine.book .hard_cover .right_cover_holder > div.right_page [data-type] {
+  border: none;
+  background: #ffffff;
+}
+#magazine.book .hard_cover .right_cover_holder > div.right_page > div.right_page_gradient {
+  width: 3%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* Standard syntax */
+  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Firefox 3.6 to 15 */
+  background: -o-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Opera 11.1 to 12.0 */
+  background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-gradient(linear, right, left, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0)));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#magazine.book .hard_cover .left_cover_holder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  /* IE 9 */
+  -webkit-transform-origin: 50% 50%;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(180deg) translateZ(1px);
+}
+#magazine.book .hard_cover .left_cover_holder > div.left_page {
+  border: none;
+  box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -ms-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 1% 1%;
+  background: 0 0 no-repeat #ffffff;
+  background-size: cover;
+}
+#magazine.book .hard_cover .left_cover_holder > div.left_page [data-type] {
+  border: none;
+}
+#magazine.book .hard_cover .left_cover_holder > div.left_page > div.left_page_gradient {
+  width: 3%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* Standard syntax */
+  background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Firefox 3.6 to 15 */
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Opera 11.1 to 12.0 */
+  background: -ms-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-gradient(linear, left, right, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0)));
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#magazine.book .hard_cover .flip_corner {
+  -webkit-transform: translateZ(1px);
+  transform: translateZ(1px);
+  height: 100%;
+}
+#magazine.book .front_cover .hard_cover_rotator {
+  position: absolute;
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(0) translateZ(1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(0) translateZ(1px);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
+}
+#magazine.book .front_cover .right_cover_holder div.right_page {
+  background-image: url("../images/book-front-cover.png");
+}
+#magazine.book .front_cover .left_cover_holder div.left_page {
+  background-image: url("../images/book-front-dustjacket.png");
+}
+#magazine.book .back_cover .hard_cover_rotator {
+  position: absolute;
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(0) translateZ(-1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(0) translateZ(-1px);
+  transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+  transition-timing-function: easy-in-out;
+  -ms-transition-timing-function: easy-in-out;
+  -webkit-transition-timing-function: easy-in-out;
+  transition-delay: 0;
+  -ms-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  transition-property: transform, transform-origin;
+  -moz-transition-property: transform, transform-origin;
+  -o-transition-property: transform, transform-origin;
+  -ms-transition-property: -ms-transform, -ms-transform-origin;
+  -webkit-transition-property: -webkit-transform, -webkit-transform-origin;
+}
+#magazine.book .back_cover .right_cover_holder div.right_page {
+  background-image: url("../images/book-back-dustjacket.png");
+}
+#magazine.book .back_cover .left_cover_holder div.left_page {
+  background-image: url("../images/book-back-cover.png");
 }
 #magazine .flip_left .rp_shadow_rotator {
   transform-origin: 0 0;
@@ -536,6 +716,38 @@ Version: 1.0
 #magazine .flip_left .flip_corner {
   right: auto;
   left: -100%;
+}
+#magazine.book .front_cover.flip_left .hard_cover_rotator {
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(180deg) translateZ(1px);
+}
+#magazine.book .back_cover.flip_left .hard_cover_rotator {
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(180deg) translateZ(-1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(180deg) translateZ(-1px);
 }
 #magazine .flip_left.on_left .shadow_holder {
   width: 0;

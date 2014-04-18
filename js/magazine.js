@@ -27,9 +27,10 @@
             $contentPage= false,
             settings    = {
                 container       : $('body'),         //container for the magazine
-                load            : true,              //load the images and trigger a loadpage event to children
-                unload          : false,              //unload the images and trigger a unloadpage event to children
-                contentMarkup    : {
+                load            : false,             //load the images and trigger a loadpage event to children
+                unload          : false,             //unload the images and trigger a unloadpage event to children
+                hardcover       : true,
+                contentMarkup   : {
                     titleTag    : 'h2',
                     titleClass  : '',
                     wrapperTag  : 'div',
@@ -70,7 +71,7 @@
                                             '<div class="magazine_help">Click on the top (right/left) corner to flip the page</div>'+
                                             '<div id="imageHolder">'+
                                                 '<div id="magazineHolder">'+
-                                                    '<div id="magazine"></div>'+
+                                                    '<div id="magazine" class="'+(settings.hardcover?'book':'soft')+'"></div>'+
                                                 '</div>'+
                                             '</div>'+
                                         '</div>'+
@@ -79,7 +80,9 @@
             $imageHolder = $('#imageHolder');
         }
 
-        function createLeaf() {
+        function createLeaf(coverClass) {
+            var isPage = (typeof coverClass === 'undefined')?true:false;
+            coverClass = (typeof coverClass === 'undefined')?'':coverClass;
             if ($magazine !== null)
             {
                 var leaf    = $('#magazine .leaf').length + 1,
@@ -111,7 +114,22 @@
                                 '</div>' +
                                 '<div class="flip_corner" style="z-index:'+ (index+2) +'"></div>' +
                            '</div>',
-                    $leaf = $(html);
+                   htmlCover = '<div class="leaf hard_cover '+ coverClass +'" data-leaf="'+ leaf +'" style="z-index:'+ index +'" data-leftindex="'+ lindex +'" data-rightindex="'+ index +'" data-rpageindex="'+ (index+1) +'">' +
+                                '<div class="hard_cover_rotator">' +
+                                    '<div class="right_cover_holder" style="z-index:'+ (index+1) +'">' +
+                                        '<div class="right_page" data-page="'+ (pages) +'">' +
+                                            '<div class="right_page_gradient"></div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="left_cover_holder">' +
+                                        '<div class="left_page" data-page="'+ (pages+1) +'">' +
+                                            '<div class="left_page_gradient"></div>' +
+                                       '</div>' +
+                                    '</div>' +
+                                '</div>'+     
+                                '<div class="flip_corner" style="z-index:'+ (index+2) +'"></div>' +
+                       '</div>',
+                    $leaf = isPage?$(html):$(htmlCover);
                 $magazine.append($leaf);
                 return $leaf;
             }
@@ -166,76 +184,24 @@
             }
         }
         
-        function followMouse (e, $page) {
-//          $(document).off('mousemove.flip_page')
-//          .on('mousemove.flip_page', function(e){
-//              followMouse(e,$obj);
-//          });
-               $page.find('.right_page_holder').css('overflow','hidden');
-                $page.find('.left_page_holder').show();
-//                $page.find('.left_page_rotator')
-//                    .css('transform' , 'translate('+e.pageX+','+e.pageY+')')
-//                    .css('-ms-transform' , 'translate('+e.pageX+','+e.pageY+')')
-//                    .css('webkit-transform' , 'translate('+e.pageX+','+e.pageY+')');
-//                $page.find('.left_page')
-//                    .css('transform' , 'translate('+e.pageX+','+e.pageY+')')
-//                    .css('-ms-transform' , 'translate('+e.pageX+','+e.pageY+')')
-//                    .css('webkit-transform' , 'translate('+e.pageX+','+e.pageY+')');
-               $page.find('.left_page_rotator').animate({
-                        'transform' : 'translate('+e.pageX+','+e.pageY+')',
-                        '-ms-transform' : 'translate('+e.pageX+','+e.pageY+')',
-                        'webkit-transform' : 'translate('+e.pageX+','+e.pageY+')'},1);
-                $page.find('.left_page').animate({
-                    'transform' : 'translate('+e.pageX+','+e.pageY+')',
-                    '-ms-transform' : 'translate('+e.pageX+','+e.pageY+')',
-                    'webkit-transform' : 'translate('+e.pageX+','+e.pageY+')'},1);
-
-//                .rp_shadow_rotator {
-//                   .flip(0, 0, 0deg, -0, 0); 
-//                }
-//                .rp_shadow_gradient {
-//                   width: @shadowWidth; 
-//                }
-//                .shadow_opacity {
-//                   opacity: 0;
-//                }
-//                .shadow_rotator {
-//                    .flip((-1*@lpShadowWidth), 0, 0deg, 0, 0);
-//                }
-//                .right_page_rotator {
-//                   .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
-//                }
-//                .right_page_holder > div.right_page {
-//                    .flip(@flipZoneWidth, 0, 0deg, 3%, 0);
-//                }
-//               
-//                // shows page 2
-//                .left_page_rotator {
-//                   .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
-//                 }
-//                .left_page_holder > div.left_page {
-//                   .flip((@flipZoneWidth - @magInWidth + 0.7%), 0, 0deg, 0, 0);
-//                }
-//                .flip_corner {
-//                   .flip(@flipLpRevShadowX, @flipLpRevShadowY, @flipDeg, 0, 0);
-//                }
-        }
-
-        function bindFlip () {
+        function bindEvents () {
             /* Show the corner fliped */
             $("#magazine .flip_corner").hover(function (e) {
                 e.preventDefault();
-                $(this).closest(".leaf").addClass("show_corner");
+                $(this).parent(".leaf").addClass("show_corner");
             },function (e) {
                 e.preventDefault();
-                $(this).closest(".leaf").removeClass("show_corner");
+                $(this).parent(".leaf").removeClass("show_corner");
             });
-            
+
             /* flip the page back or ford */
             $("#magazine .flip_corner").click(function (e) {
+                // If flip by mouse click and didn't finish turning page do nothing
                 if (typeof(e.pageX) !== 'undefined' && $.manageMagazine.isFlipping()) { return; }
+                
+                // Start turning page
                 var $this = $(this),
-                    $leaf = $this.closest(".leaf"),
+                    $leaf = $this.parent(".leaf"),
                     leafNo = $leaf.data('leaf'),
                     right = !$leaf.hasClass("flip_left");
 
@@ -244,15 +210,11 @@
                 $leaf.css('z-index',$leaf.data("rightindex"));
                 
                 if (right) {
-                    if (leafNo === firstLeafNo) { window.setTimeout($.manageMagazine.removeMyClass,timerFlipMs,$imageHolder,'finishBook','openBook'); }
-                    if (leafNo === lastLeafNo) { $imageHolder.removeClass('openBook').addClass('finishBook'); }
                     if(typeof(e.pageX) !== 'undefined') { $.manageMagazine.loadPage($leaf.find('.left_page')); }
                     $leaf.addClass('show_page').addClass("flip_left");
                     window.setTimeout($.manageMagazine.changeIndex,timerFlipMs,$leaf,'l');
                 }
                 else {
-                    if (leafNo === firstLeafNo) { $imageHolder.removeClass('openBook').removeClass('finishBook'); }
-                    if (leafNo === lastLeafNo) { window.setTimeout($.manageMagazine.removeMyClass,timerFlipMs,$imageHolder,'finishBook','openBook'); }
                     if(typeof(e.pageX) !== 'undefined') { $.manageMagazine.loadPage($leaf.find('.right_page')); }
                     $leaf.removeClass('on_left').removeClass("flip_left");
                     window.setTimeout($.manageMagazine.removeMyClass,timerFlipMs,$leaf,'show_page');
@@ -261,7 +223,7 @@
                 if (typeof(e.pageX) !== 'undefined') {window.setTimeout($.manageMagazine.flipOff,timerFlipMs);}
             });
             
-            /* bind the loadpage event on the page*/
+            /* bind the loadpage event on the page */
             if (settings.load)
             {
                 $magazine.find('div[data-page]').on('magLoadPage.loadPageImages',function(e){
@@ -274,12 +236,11 @@
                             }
                         });
                         $(this).attr('loaded','yes');
-                        $(this).children().trigger('loadpage');
                     }
                 });
             }
             
-            /* bind the unloadpage event on the page*/
+            /* bind the unloadpage event on the page */
             if (settings.unload)
             {
                 $magazine.find('div[data-page]').on('magUnloadPage.unloadPageImages',function(e){
@@ -289,7 +250,6 @@
                                $(this).attr('src','');
                         });
                         $(this).attr('loaded','no');
-                        $(this).children().trigger('unloadpage');
                     }
                 });
             }
@@ -298,31 +258,51 @@
         function boundMagazine () {
             // Attache front cover and first blank leaf
             page = 0;
-            $lastLeaf = createLeaf();
-            firstLeafNo = $lastLeaf.data('leaf');
-            if ($frontCover) {
-                attachPage($frontCover.data('title','Cover'), $lastLeaf, 'r');
+            
+            if (settings.hardcover) {
+                $lastLeaf = createLeaf('front_cover');
+                firstLeafNo = $lastLeaf.data('leaf');
+                if ($frontCover) {
+                    attachPage($frontCover.data('title','Cover'), $lastLeaf, 'r');
+                }
+                else {
+                    attachPage($('<div data-title="Cover" data-type="frontcover"></div>'), $lastLeaf, 'r');
+                }
+                attachPage($('<div data-title="" data-type="frontflap"></div>'), $lastLeaf, 'l');
+
+                // blank leaf
+                $lastLeaf = createLeaf();
+                attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'r');
+                attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
+
+                // Content page
+                $lastLeaf = createLeaf();
+                attachPage($('<'+settings.contentMarkup.wrapperTag+' id="magazineIndex" data-title="content" data-type="content" class="'+settings.contentMarkup.wrapperClass+'">'+
+                                '<'+settings.contentMarkup.titleTag+' class="'+settings.contentMarkup.titleClass+'">Content</'+settings.contentMarkup.titleTag+'>'+
+                                '<'+settings.contentMarkup.groupTag+' class="'+settings.contentMarkup.groupClass+'"></'+settings.contentMarkup.groupTag+'>'+
+                                '</'+settings.contentMarkup.wrapperTag+'>'), $lastLeaf, 'r');
+                attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
+                $contentPage = $lastLeaf.find('#magazineIndex '+settings.contentMarkup.groupTag);
+                contentPage = $lastLeaf.find('.right_page').data('page');
             }
             else {
-                attachPage($('<div data-title="Cover" data-type="frontcover"></div>'), $lastLeaf, 'r');
-            }
-            attachPage($('<div data-title="" data-type="frontflap"></div>'), $lastLeaf, 'l');
-            $lastLeaf.addClass('front_cover');
-            
-            // blank leaf
-            $lastLeaf = createLeaf();
-            attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'r');
-            attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
+                $lastLeaf = createLeaf();
+                firstLeafNo = $lastLeaf.data('leaf');
+                if ($frontCover) {
+                    attachPage($frontCover.data('title','Cover'), $lastLeaf, 'r');
+                }
+                else {
+                    attachPage($('<div data-title="Cover" data-type="frontcover"></div>'), $lastLeaf, 'r');
+                }
 
-            // Content page
-            $lastLeaf = createLeaf();
-            attachPage($('<'+settings.contentMarkup.wrapperTag+' id="magazineIndex" data-title="content" data-type="content" class="'+settings.contentMarkup.wrapperClass+'">'+
-                            '<'+settings.contentMarkup.titleTag+' class="'+settings.contentMarkup.titleClass+'">Content</'+settings.contentMarkup.titleTag+'>'+
-                            '<'+settings.contentMarkup.groupTag+' class="'+settings.contentMarkup.groupClass+'"></'+settings.contentMarkup.groupTag+'>'+
-                            '</'+settings.contentMarkup.wrapperTag+'>'), $lastLeaf, 'r');
-            attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
-            $contentPage = $lastLeaf.find('#magazineIndex ul');
-            contentPage = $lastLeaf.find('.right_page').data('page');
+                // Content page
+                attachPage($('<'+settings.contentMarkup.wrapperTag+' id="magazineIndex" data-title="content" data-type="content" class="'+settings.contentMarkup.wrapperClass+'">'+
+                                '<'+settings.contentMarkup.titleTag+' class="'+settings.contentMarkup.titleClass+'">Content</'+settings.contentMarkup.titleTag+'>'+
+                                '<'+settings.contentMarkup.groupTag+' class="'+settings.contentMarkup.groupClass+'"></'+settings.contentMarkup.groupTag+'>'+
+                                '</'+settings.contentMarkup.wrapperTag+'>'), $lastLeaf, 'l');
+                $contentPage = $lastLeaf.find('#magazineIndex '+settings.contentMarkup.groupTag);
+                contentPage = $lastLeaf.find('.left_page').data('page');
+            }
             
             // Attache pages to magazine
             $this.each(function() {
@@ -355,28 +335,45 @@
                 }
             });
 
-            // finish th book
-            if ((page%2) !== 0) {
-                attachPage($('<div data-title=""  data-type="endpaper"></div>'), $lastLeaf, 'l');
-            }
-            
-            // last blank page
-            $lastLeaf = createLeaf();
-            attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'r');
-            attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
-
-            // Back cover
-            $lastLeaf = createLeaf();
-            attachPage($('<div data-title="backflap" data-type="backflap"></div>'), $lastLeaf, 'r');
-            if ($backCover) {
-                $backCover.data('title','Back Cover');
-                attachPage($backCover, $lastLeaf, 'l');
+            // finish the book
+            if (settings.hardcover) {
+                if ((page%2) !== 0) {
+                    attachPage($('<div data-title=""  data-type="endpaper"></div>'), $lastLeaf, 'l');
+                }
+                
+                // last blank page
+                $lastLeaf = createLeaf();
+                attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'r');
+                attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
+    
+                // Back cover
+                $lastLeaf = createLeaf('back_cover');
+                attachPage($('<div data-title="backflap" data-type="backflap"></div>'), $lastLeaf, 'r');
+                if ($backCover) {
+                    $backCover.data('title','Back Cover');
+                    attachPage($backCover, $lastLeaf, 'l');
+                }
+                else {
+                    attachPage($('<div data-title="Back Cover" data-type="backcover"></div>'), $lastLeaf, 'l');
+                }
             }
             else {
-                attachPage($('<div data-title="Back Cover" data-type="backcover"></div>'), $lastLeaf, 'l');
+                // Back cover
+                if ($backCover) {
+                    $backCover.data('title','Back Cover');
+                }
+                else {
+                    $backCover = $('<div data-title="Back Cover" data-type="backcover"></div>');
+                }
+
+                if ((page%2) === 0) {
+                    $lastLeaf = createLeaf();
+                    attachPage($backCover.clone(), $lastLeaf, 'r');
+                }
+                attachPage($backCover, $lastLeaf, 'l');
+
             }
             lastLeafNo = $lastLeaf.data('leaf');
-            $lastLeaf.addClass('back_cover');
 
             // no show last page shadow
             var lastShadow = (lastLeafNo > 1)?lastLeafNo - 1:1;
@@ -399,14 +396,14 @@
         
         /* Work the magic */
         if (totalPages > 0) {
-            totalPages += 10; //blank pages content and cover
+            totalPages += settings.hardcover?10:4; //blank pages content and cover
 
             createMagazine();
             boundMagazine ();
             createContentPage ();
             
-            // bind the corners with click function
-            bindFlip ();
+            // bind the corners with click function and load events
+            bindEvents ();
             
             // load images in page 1
             $.manageMagazine.loadPage(1);
@@ -431,7 +428,7 @@
             magHldMrgIn     = 0,    // Vertical margin
             magHldPctIn     = true, // Margin percentage  
             settings        = {
-                loadThreshold :  2,
+                loadThreshold :  20,
                 magHldMrgOut : '10%', // Extenal margin
                 magHldMrgIn  : '0%'  // Internal margin
             },
@@ -477,6 +474,8 @@
                     max = ((number + 1 + settings.loadThreshold) > totalPages)?totalPages:(number + 1 + settings.loadThreshold);
                 }
             }
+            
+            
             // load and unload other pages
             if (((rPage.length > 0) || (lPage.length > 0)) && (level === 0))
             {

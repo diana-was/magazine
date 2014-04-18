@@ -19,8 +19,13 @@
     // When the document loads do everything inside here ...  
     $(document).ready(function(){  
         var headerH = $('#magazineHeaderRight').outerHeight() + 'px';
-        $.manageMagazine.init({loadThreshold:10, magHldMrgOut: headerH, magHldMrgIn: '4%' });
+        $.manageMagazine.init({
+            loadThreshold:$("img").length, 
+            magHldMrgOut: headerH, 
+            magHldMrgIn: '4%' 
+        });
         $("img").magazine({container: $('#magazineBody'),
+            hardcover       : true,
             contentMarkup    : {
                 titleTag    : 'h3',
                 titleClass  : '',
@@ -67,26 +72,26 @@
             </div>
             <div id="bodyColumn" class="row">
                 <div id="magazineBody" class="col-md-12 col-sm-12 col-sx-12">
-                    <img src="" data-src="images/image-03.jpg" width="100%" height="100%" data-type='frontcover' data-title="Cover" data-image="images/image-03.jpg"/>
-                    <img src="" data-src="images/image-01.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-01.jpg"/>
-                    <img src="" data-src="images/image-02.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-02.jpg"/>
-                    <img src="" data-src="images/image-04.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-04.jpg"/>
-                    <img src="" data-src="images/image-06.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-06.jpg"/>
-                    <img src="" data-src="images/image-07.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-07.jpg"/>
-                    <img src="" data-src="images/image-05.jpg" width="200%" height="100%" data-type='double' data-title="" data-image="images/image-05.jpg"/>
-                    <img src="" data-src="images/image-08.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-08.jpg"/>
-                    <img src="" data-src="images/image-09.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-09.jpg"/>
-                    <img src="" data-src="images/image-10.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-10.jpg"/>
-                    <img src="" data-src="images/image-11.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-11.jpg"/>
-                    <img src="" data-src="images/image-12.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-12.jpg"/>
-                    <img src="" data-src="images/image-14.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-14.jpg"/>
-                    <img src="" data-src="images/image-13.jpg" width="200%" height="100%" data-type='double' data-title="" data-image="images/image-13.jpg"/>
-                    <img src="" data-src="images/image-15.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-15.jpg"/>
-                    <img src="" data-src="images/image-16.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-16.jpg"/>
-                    <img src="" data-src="images/image-17.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-17.jpg"/>
-                    <img src="" data-src="images/image-18.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-18.jpg"/>
-                    <img src="" data-src="images/image-19.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-19.jpg"/>
-                    <img src="" data-src="images/image-20.jpg" width="100%" height="100%" data-type='backcover' data-title="" data-image="images/image-20.jpg"/>
+                    <img src="images/image-03.jpg" data-src="images/image-03.jpg" width="100%" height="100%" data-type='frontcover' data-title="Cover" data-image="images/image-03.jpg"/>
+                    <img src="images/image-01.jpg" data-src="images/image-01.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-01.jpg"/>
+                    <img src="images/image-02.jpg" data-src="images/image-02.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-02.jpg"/>
+                    <img src="images/image-04.jpg" data-src="images/image-04.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-04.jpg"/>
+                    <img src="images/image-06.jpg" data-src="images/image-06.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-06.jpg"/>
+                    <img src="images/image-07.jpg" data-src="images/image-07.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-07.jpg"/>
+                    <img src="images/image-05.jpg" data-src="images/image-05.jpg" width="200%" height="100%" data-type='double' data-title="" data-image="images/image-05.jpg"/>
+                    <img src="images/image-08.jpg" data-src="images/image-08.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-08.jpg"/>
+                    <img src="images/image-09.jpg" data-src="images/image-09.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-09.jpg"/>
+                    <img src="images/image-10.jpg" data-src="images/image-10.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-10.jpg"/>
+                    <img src="images/image-11.jpg" data-src="images/image-11.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-11.jpg"/>
+                    <img src="images/image-12.jpg" data-src="images/image-12.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-12.jpg"/>
+                    <img src="images/image-14.jpg" data-src="images/image-14.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-14.jpg"/>
+                    <img src="images/image-13.jpg" data-src="images/image-13.jpg" width="200%" height="100%" data-type='double' data-title="" data-image="images/image-13.jpg"/>
+                    <img src="images/image-15.jpg" data-src="images/image-15.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-15.jpg"/>
+                    <img src="images/image-16.jpg" data-src="images/image-16.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-16.jpg"/>
+                    <img src="images/image-17.jpg" data-src="images/image-17.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-17.jpg"/>
+                    <img src="images/image-18.jpg" data-src="images/image-18.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-18.jpg"/>
+                    <img src="images/image-19.jpg" data-src="images/image-19.jpg" width="100%" height="100%" data-type='single' data-title="" data-image="images/image-19.jpg"/>
+                    <img src="images/image-20.jpg" data-src="images/image-20.jpg" width="100%" height="100%" data-type='backcover' data-title="" data-image="images/image-20.jpg"/>
                 </div>
             </div>
             <div id="footerColumn" class="row">

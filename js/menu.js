@@ -138,3 +138,61 @@
             //});
             $.manageMagazine.goToPage(5);
         });
+
+        
+        function followMouse (e, $page) {
+//          $(document).off('mousemove.flip_page')
+//          .on('mousemove.flip_page', function(e){
+//              followMouse(e,$obj);
+//          });
+               $page.find('.right_page_holder').css('overflow','hidden');
+                $page.find('.left_page_holder').show();
+//                $page.find('.left_page_rotator')
+//                    .css('transform' , 'translate('+e.pageX+','+e.pageY+')')
+//                    .css('-ms-transform' , 'translate('+e.pageX+','+e.pageY+')')
+//                    .css('webkit-transform' , 'translate('+e.pageX+','+e.pageY+')');
+//                $page.find('.left_page')
+//                    .css('transform' , 'translate('+e.pageX+','+e.pageY+')')
+//                    .css('-ms-transform' , 'translate('+e.pageX+','+e.pageY+')')
+//                    .css('webkit-transform' , 'translate('+e.pageX+','+e.pageY+')');
+               $page.find('.left_page_rotator').animate({
+                        'transform' : 'translate('+e.pageX+','+e.pageY+')',
+                        '-ms-transform' : 'translate('+e.pageX+','+e.pageY+')',
+                        'webkit-transform' : 'translate('+e.pageX+','+e.pageY+')'},1);
+                $page.find('.left_page').animate({
+                    'transform' : 'translate('+e.pageX+','+e.pageY+')',
+                    '-ms-transform' : 'translate('+e.pageX+','+e.pageY+')',
+                    'webkit-transform' : 'translate('+e.pageX+','+e.pageY+')'},1);
+
+//                .rp_shadow_rotator {
+//                   .flip(0, 0, 0deg, -0, 0); 
+//                }
+//                .rp_shadow_gradient {
+//                   width: @shadowWidth; 
+//                }
+//                .shadow_opacity {
+//                   opacity: 0;
+//                }
+//                .shadow_rotator {
+//                    .flip((-1*@lpShadowWidth), 0, 0deg, 0, 0);
+//                }
+//                .right_page_rotator {
+//                   .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
+//                }
+//                .right_page_holder > div.right_page {
+//                    .flip(@flipZoneWidth, 0, 0deg, 3%, 0);
+//                }
+//               
+//                // shows page 2
+//                .left_page_rotator {
+//                   .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
+//                 }
+//                .left_page_holder > div.left_page {
+//                   .flip((@flipZoneWidth - @magInWidth + 0.7%), 0, 0deg, 0, 0);
+//                }
+//                .flip_corner {
+//                   .flip(@flipLpRevShadowX, @flipLpRevShadowY, @flipDeg, 0, 0);
+//                }
+        }
+
+        
