@@ -315,6 +315,10 @@ Version: 1.0
             right:0;
             overflow: visible;
             
+            &:hover {
+                cursor: pointer;
+            }
+            
             &.active {
                 display: none;
             }
@@ -438,27 +442,20 @@ Version: 1.0
             }
             
             .right_cover_holder {
-                //              /  \
-                // ---------- /      \
-                // |        /          \    
-                // |         \          /|
-                // |  gives th\e size /  |
-                // |  the overf\low  /   |
-                // |  cuts the  \co /rner|
-                // ----------------------
+                // ---------------------
+                // |                   |  
+                // | Holds the page for|
+                // | rotate 3D Z       |
+                // |                   |
+                // ---------------------
+                //
                 width: @magInWidth;
                 height: @magInHeight;
                 position: absolute;
                 .rotate-visibility(hidden);
         
                 > div.right_page {
-                    //            ---------\
-                    //            |         \ 
-                    //            |          |
-                    //            |   the    |
-                    //            | image    |
-                    //            |          |
-                    //            ------------
+                
                     position: relative;
                     border: none;
                     width: @magInWidth;
@@ -493,30 +490,19 @@ Version: 1.0
             }
         
             .left_cover_holder {
-                //              /  \
-                // ---------- /      \
-                // |        /          \    
-                // |         \          /|
-                // |  gives th\e size /  |
-                // |  for the p\age  /   |
-                // |  to flip    \ /     |
-                // ----------------------
+                // ---------------------
+                // |                   |  
+                // | the back of the   |
+                // | cover             |
+                // |                   |
+                // ---------------------
                 width: @magInWidth;
                 height: @magInHeight;
                 position: absolute;
                 .rotate-page(180deg,50%,50%,visible);
         
                 > div.left_page {
-                    //                \  here is the image 
-                    //                 \
-                    //                  \    /
-                    // ------------------\  /
-                    // |                  \/ | 
-                    // |   makes the         |
-                    // |   corner and holds  |
-                    // |   the image         |
-                    // |                     |
-                    // -----------------------
+
                     border: none;
                     .box-shadow (0, 0, @shadowWidth, @shadowAlpha);
                     position: relative;
@@ -552,8 +538,14 @@ Version: 1.0
             }
             
             .flip_corner {
-                .z-pixel();
+                .z-pixel(2px);
+                .rotate-visibility(visible);
                 height: 100%;
+                
+                &:hover {
+                    cursor: pointer;
+                }
+                
             }
             
         }
@@ -688,12 +680,12 @@ Version: 1.0
     &.book {
         .front_cover.flip_left {
             .hard_cover_rotator {
-                .rotate-page(180deg,0,0,visible);  //for safari
+                .rotate-page(180deg,0,0,visible); 
             }
         }
         .back_cover.flip_left {
             .hard_cover_rotator {
-                .rotate-page(180deg,0,0,visible,-1px);  //for safari
+                .rotate-page(180deg,0,0,visible);  //for safari
             } 
         }
     }

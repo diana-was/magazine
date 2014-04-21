@@ -97,7 +97,7 @@
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="left_page_rotator">' +
+                                '<div class="left_page_rotator" style="z-index:'+ (index) +'">' +
                                     '<div class="left_page_holder">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
@@ -112,22 +112,22 @@
                                         '<div class="shadow_gradient shadow_opacity"></div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="flip_corner" style="z-index:'+ (index+2) +'"></div>' +
+                                '<div class="flip_corner" style="z-index:'+ (index+3) +'"></div>' +
                            '</div>',
-                   htmlCover = '<div class="leaf hard_cover '+ coverClass +'" data-leaf="'+ leaf +'" style="z-index:'+ index +'" data-leftindex="'+ lindex +'" data-rightindex="'+ index +'" data-rpageindex="'+ (index+1) +'">' +
+                   htmlCover = '<div class="leaf hard_cover '+ coverClass +'" data-leaf="'+ leaf +'" style="z-index:'+ index +'" data-leftindex="'+ lindex +'" data-rightindex="'+ index +'">' +
                                 '<div class="hard_cover_rotator">' +
                                     '<div class="right_cover_holder" style="z-index:'+ (index+1) +'">' +
                                         '<div class="right_page" data-page="'+ (pages) +'">' +
                                             '<div class="right_page_gradient"></div>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<div class="left_cover_holder">' +
+                                    '<div class="left_cover_holder" style="z-index:'+ (index) +'">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
                                        '</div>' +
                                     '</div>' +
                                 '</div>'+     
-                                '<div class="flip_corner" style="z-index:'+ (index+2) +'"></div>' +
+                                '<div class="flip_corner" style="z-index:'+ (index+3) +'"></div>' +
                        '</div>',
                     $leaf = isPage?$(html):$(htmlCover);
                 $magazine.append($leaf);
@@ -206,8 +206,9 @@
                     right = !$leaf.hasClass("flip_left");
 
                 if (typeof(e.pageX) !== 'undefined') { $.manageMagazine.flipOn($this); }
-                $leaf.find('.right_page_rotator').css('z-index','initial');
-                $leaf.css('z-index',$leaf.data("rightindex"));
+                //$leaf.find('.right_page_rotator').css('z-index','initial');
+                //$leaf.css('z-index',$leaf.data("rightindex"));
+                $.manageMagazine.changeIndex($leaf,'f')
                 
                 if (right) {
                     if(typeof(e.pageX) !== 'undefined') { $.manageMagazine.loadPage($leaf.find('.left_page')); }
@@ -638,34 +639,53 @@
                 magHldMrgIn  = parseInt(settings.magHldMrgIn);
                 magHldPctIn  = settings.magHldMrgIn.indexOf('%') !== -1;
             },
+            
             isFlipping : function() {
                 return     flipping;
             },
+            
             flipOn : function($obj) {
                 $flip = $obj.addClass('active');
                 flipping = true;
             },
+            
             flipOff : function() {
                 $flip.removeClass('active');
                 flipping = false;
             },
+            
             loadPage : function(number,level) {
                 _loadPage(number,level);
             },
+            
             unloadPage : function(number,level) {
                 _unloadPage(number,level);
             },
+            
             flipCorner : function ($page){
                 $page.children(".flip_corner").click();
             },
-            changeIndex : function ($obj,side) {
+            
+            /**
+             * $obj : html obj
+             * side : r,l or f
+             */
+            changeIndex : function ($obj,side) { 
+                var index = (side === 'l')?$obj.data("leftindex"):$obj.data('rightindex');
+                $obj.children(".flip_corner").css('z-index',index+3);
+                $obj.css("z-index",index);
+                
                 if (side === 'l') {
-                    $obj.css("z-index",$obj.data("leftindex"));
                     $obj.addClass('on_left');
                 }
+                
+                if (side === 'f') {
+                    $obj.children('.right_page_rotator').css('z-index',index+1);
+                    $obj.children('.left_page_rotator').css('z-index',index+2);
+                }
                 else {
-                    $obj.find('.right_page_rotator').css('z-index',$obj.data('rpageindex'));
-                    $obj.css("z-index",$obj.data("rightindex"));
+                    $obj.children('.right_page_rotator').css('z-index',index+1);
+                    $obj.children('.left_page_rotator').css('z-index',index);
                 }
             },
             
