@@ -635,7 +635,7 @@ Version: 1.0
             // |          |  next right page
             // |          |  page 3
             // -----------
-           .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 13%);
+           .flip((-1 * @flipZoneWidth),0, 0deg, 80%, 15%);
         }
         .right_page_holder > div.right_page {
             //              ------------
@@ -685,8 +685,11 @@ Version: 1.0
         }
         .back_cover.flip_left {
             .hard_cover_rotator {
-                .rotate-page(180deg,0,0,visible);  //for safari
+                .rotate-page(180deg,0,0,visible,-1px);  //for safari
             } 
+            .flip_corner {
+                .z-pixel(3px);
+            }
         }
     }
     

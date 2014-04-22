@@ -691,11 +691,11 @@ Version: 1.0
   -webkit-transform: translate(-5%, 0) rotate(0deg);
 }
 #magazine .flip_left .right_page_rotator {
-  transform-origin: 80% 13%;
+  transform-origin: 80% 15%;
   transform: translate(-110%, 0) rotate(0deg);
-  -ms-transform-origin: 80% 13%;
+  -ms-transform-origin: 80% 15%;
   -ms-transform: translate(-110%, 0) rotate(0deg);
-  -webkit-transform-origin: 80% 13%;
+  -webkit-transform-origin: 80% 15%;
   -webkit-transform: translate(-110%, 0) rotate(0deg);
 }
 #magazine .flip_left .right_page_holder > div.right_page {
@@ -754,9 +754,13 @@ Version: 1.0
   -webkit-backface-visibility: visible;
   /* Chrome, Safari, Opera */
   backface-visibility: visible;
-  -webkit-transform: rotateY(180deg) translateZ(1px);
+  -webkit-transform: rotateY(180deg) translateZ(-1px);
   /* Chrome, Safari, Opera */
-  transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(180deg) translateZ(-1px);
+}
+#magazine.book .back_cover.flip_left .flip_corner {
+  -webkit-transform: translateZ(3px);
+  transform: translateZ(3px);
 }
 #magazine .flip_left.on_left .shadow_holder {
   width: 0;
