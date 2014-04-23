@@ -127,7 +127,7 @@ Version: 1.0
         
         .hard_cover.flip_left.show_corner {
             .hard_cover_rotator {
-                .rotate-page(170deg,0,0,visible);
+                //.rotate-page(170deg,0,0,visible,-1px);
             }
         }
     }
@@ -179,10 +179,13 @@ Version: 1.0
             position: relative;
             width: @magPageWidth;
             height: @magPageHeight;
-            overflow-y: scroll;
-            overflow-x: hidden;
+            overflow: hidden;
             margin : 0 0 @magPageMargin 0;
             padding: 0;
+            
+            &:hover, &:active, &:focus {
+                overflow-y: scroll;
+            }
             
             [data-type] {
                 border: 1px solid @gray;
@@ -265,10 +268,13 @@ Version: 1.0
             position: relative;
             width: @magPageWidth;
             height: @magPageHeight;
-            overflow-y: scroll;
-            overflow-x: hidden;
+            overflow: hidden;
             margin : 0 0 @magPageMargin 0;
             padding: 0;
+            
+            &:hover, &:active, &:focus {
+                overflow-y: scroll;
+            }
             
             [data-type] {
                 border: 1px solid @gray;
@@ -554,6 +560,7 @@ Version: 1.0
              .hard_cover_rotator {
                 .open-close-book(0,0,0,@flipTimer,visible,1px);  //for safari
             } 
+            
             .right_cover_holder {
                 div.right_page {
                     background-image: url(@frontCover);
@@ -572,6 +579,7 @@ Version: 1.0
             .hard_cover_rotator {
                 .open-close-book(0,0,0,@flipTimer,visible,-1px);  //for safari
             } 
+            
             .right_cover_holder {
                 div.right_page {
                     background-image: url(@backDustJacket);

@@ -15,7 +15,40 @@
         firstLeafNo = false,
         lastLeafNo  = false,
         contentPage = false;
-   
+ 
+    $.fn.dontScrollParent = function () {
+        this
+            .off('mousewheel.noScroll DOMMouseScroll.noScroll')
+            .on('mousewheel.noScroll DOMMouseScroll.noScroll', function (e) {
+                var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+                if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {
+                    e.preventDefault();
+                    console.log('in');
+                    return;
+                }
+                return true;
+            });
+
+        this
+            .off('keydown.noScroll')
+            .on('keydown.noScroll', function (e) {
+                if ((e.which === 40) && $(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {  // Down 
+                    e.preventDefault();
+                    return;
+                }
+                if (e.which === 106) {  // home 
+                    alert('Hi there');
+                    return true;
+                }
+                return true;
+                });
+    };
+
+    $.fn.scrollParent = function () {
+        this.off('mousewheel.noScroll DOMMouseScroll.noScroll');
+        this.off('keydown.noScroll');
+    };
+    
     // element function
     $.fn.magazine = function(options) {
         var $this       = $(this),
@@ -97,7 +130,7 @@
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="left_page_rotator" style="z-index:'+ (index) +'">' +
+                                '<div class="left_page_rotator" style="z-index:inherit">' +
                                     '<div class="left_page_holder">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
@@ -116,12 +149,12 @@
                            '</div>',
                    htmlCover = '<div class="leaf hard_cover '+ coverClass +'" data-leaf="'+ leaf +'" style="z-index:'+ index +'" data-leftindex="'+ lindex +'" data-rightindex="'+ index +'">' +
                                 '<div class="hard_cover_rotator">' +
-                                    '<div class="right_cover_holder" style="z-index:'+ (index+1) +'">' +
+                                    '<div class="right_cover_holder" style="z-index:inherit">' +
                                         '<div class="right_page" data-page="'+ (pages) +'">' +
                                             '<div class="right_page_gradient"></div>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<div class="left_cover_holder" style="z-index:'+ (index) +'">' +
+                                    '<div class="left_cover_holder" style="z-index:inherit">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
                                        '</div>' +
@@ -254,6 +287,10 @@
                     }
                 });
             }
+            
+            $magazine.find('.left_page').dontScrollParent();
+            $magazine.find('.right_page').dontScrollParent();
+
         }
  
         function boundMagazine () {
@@ -674,18 +711,27 @@
                 var index = (side === 'l')?$obj.data("leftindex"):$obj.data('rightindex');
                 $obj.children(".flip_corner").css('z-index',index+3);
                 $obj.css("z-index",index);
-                
+
                 if (side === 'l') {
                     $obj.addClass('on_left');
                 }
                 
+                if ($obj.hasClass('hard_cover')) {
+                    return;
+                }
+
+                // Change page 
                 if (side === 'f') {
                     $obj.children('.right_page_rotator').css('z-index',index+1);
                     $obj.children('.left_page_rotator').css('z-index',index+2);
                 }
+                else if (side === 'l') {
+                    $obj.children('.right_page_rotator').css('z-index','inherit');
+                    $obj.children('.left_page_rotator').css('z-index','inherit');
+                }
                 else {
                     $obj.children('.right_page_rotator').css('z-index',index+1);
-                    $obj.children('.left_page_rotator').css('z-index',index);
+                    $obj.children('.left_page_rotator').css('z-index','inherit');
                 }
             },
             
