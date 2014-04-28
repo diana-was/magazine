@@ -570,12 +570,14 @@
         },
         
         _goToPage = function (number,timerMs,level) {
-            var leaf,
-                next,
-                prev,
-                id;
+            var $leaf,
+                $next,
+                $prev,
+                id,
+                nextPage;
             
-            number *= 1; // sure is a number
+            // clean-up parameters
+            number *= 1;
             timerMs = (typeof(timerMs) === 'undefined')?0:timerMs*1;
             level   = (typeof(level) === 'undefined')?0:level*1;
 
@@ -584,64 +586,53 @@
             }
             
             var rPage = $("#magazine .right_page[data-page='"+number+"']"),
-                lPage = $("#magazine .left_page[data-page='"+number+"']");
-            
-            // it is a right page
-            if (rPage.length > 0) {
-                leaf = rPage.closest(".leaf");
+                lPage = $("#magazine .left_page[data-page='"+number+"']"),
+                right = (rPage.length > 0),
+                $page = right?rPage:lPage;
+
+            if ($page.length > 0) {
+                $leaf = $page.closest(".leaf");
                 
                 if (level === 0) {
-                    _loadPage(rPage);
+                    _loadPage($page);
                 }
                 
-                // Flip the pages back till here
-                if (leaf.hasClass("flip_left")) {
-                    id     = leaf.data('leaf')*1 + 1;
-                    next   = $("#magazine .leaf[data-leaf='"+id+"']");
-                    if ((next.length > 0)  && next.hasClass("flip_left")) {
-                        timerMs = _goToPage(number + 2,timerMs,level+1);
-                    }
-                    window.setTimeout($.manageMagazine.flipCorner,timerMs,leaf);
-                    timerMs += timerFlipMs;
-                }
-                // Flip the pages till here
-                else {
-                    id      = leaf.data('leaf')*1 - 1;
-                    prev    = $("#magazine .leaf[data-leaf='"+id+"']");
+                // Page is on the left of the magazine. Flip the pages back till here
+                if ($leaf.hasClass("flip_left")) {
+                    id      = $leaf.data('leaf')*1 + 1;
+                    $next   = $("#magazine .leaf[data-leaf='"+id+"']");
                     
-                    if ((prev.length > 0) && !prev.hasClass("flip_left")) {
+                    //if the next page is fliped on top we need to flip it
+                    if (($next.length > 0)  && $next.hasClass("flip_left")) {
+                        nextPage= right?number + 2:number + 1;
+                        timerMs = _goToPage(nextPage,timerMs,level+1);
+                    }
+                    
+                    //if it is a right page we need to flip the page to see it
+                    if (right) {
+                        window.setTimeout($.manageMagazine.flipCorner,timerMs,$leaf);
+                        timerMs += timerFlipMs;
+                    }
+                }
+                // Page is on the right of the magazine. Flip the pages till here
+                else {
+                    id      = $leaf.data('leaf')*1 - 1;
+                    $prev    = $("#magazine .leaf[data-leaf='"+id+"']");
+                    
+                    // if the previous page is on top we need to flip it
+                    if (($prev.length > 0) && !$prev.hasClass("flip_left")) {
+                        nextPage= right?number - 1:number - 2;
                         timerMs = _goToPage(number - 1,timerMs,level+1);
                     }
-                }
-            }
-            // it is a left page
-            else if (lPage.length > 0) {
-                leaf = lPage.closest(".leaf");
-
-                if (level === 0) { _loadPage(lPage); }
-                
-                // Flip the pages back till here
-                if (leaf.hasClass("flip_left")) {
-                    id      = leaf.data('leaf')*1 + 1;
-                    next    = $("#magazine .leaf[data-leaf='"+id+"']");
-                    
-                    if ((next.length > 0) && next.hasClass("flip_left")) {
-                        timerMs = _goToPage(number + 1,timerMs,level+1);
+                    //if it is a left page we need to flip the page to see it
+                    if (!right) {
+                        window.setTimeout($.manageMagazine.flipCorner,timerMs,$leaf);
+                        $leaf.addClass('show_page');
+                        timerMs += timerFlipMs;
                     }
                 }
-                // Flip the pages till here
-                else {
-                    id      = leaf.data('leaf')*1 - 1;
-                    prev    = $("#magazine .leaf[data-leaf='"+id+"']");
-
-                    if ((prev.length > 0) && !prev.hasClass("flip_left")) {
-                        timerMs = _goToPage(number - 2,timerMs,level+1);
-                    }
-                    window.setTimeout($.manageMagazine.flipCorner,timerMs,leaf);
-                    leaf.addClass('show_page');
-                    timerMs += timerFlipMs;
-                }
             }
+            
             return timerMs;
         },
 
@@ -697,8 +688,8 @@
                 _unloadPage(number,level);
             },
             
-            flipCorner : function ($page){
-                $page.children(".flip_corner").click();
+            flipCorner : function ($leaf){
+                $leaf.children(".flip_corner").click();
             },
             
             /**
