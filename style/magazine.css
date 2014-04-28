@@ -63,7 +63,7 @@ Version: 1.0
   padding: 1em;
   margin: 0 auto 0 15%;
 }
-.desk #imageHolder {
+.desk #innerHolder {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -74,23 +74,18 @@ Version: 1.0
   height: 100%;
   margin: 0;
 }
-.desk #imageHolder #magazineHolder {
+.desk #innerHolder #magazineHolder {
   padding: 0 0 0 50%;
   width: 100%;
   height: 100%;
 }
-.desk #imageHolder #magazineHolder #magazine {
+.desk #innerHolder #magazineHolder #magazine {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   position: relative;
   width: 100%;
   height: 100%;
-}
-#magazine {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
 }
 #magazine .leaf {
   position: absolute;
@@ -123,22 +118,6 @@ Version: 1.0
 #magazine .show_corner .right_page_rotator,
 #magazine .show_page .right_page_rotator {
   z-index: initial!important;
-}
-#magazine.book .hard_cover.show_corner .hard_cover_rotator {
-  transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
-  /* IE 9 */
-  -webkit-transform-origin: 0 0;
-  /* Safari and Chrome */
-  -webkit-transform-style: preserve-3d;
-  /* Chrome, Safari, Opera */
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: visible;
-  /* Chrome, Safari, Opera */
-  backface-visibility: visible;
-  -webkit-transform: rotateY(10deg) translateZ(1px);
-  /* Chrome, Safari, Opera */
-  transform: rotateY(10deg) translateZ(1px);
 }
 #magazine .right_page_rotator {
   width: 100%;
@@ -753,6 +732,22 @@ Version: 1.0
 #magazine.book .back_cover.flip_left .flip_corner {
   -webkit-transform: translateZ(3px);
   transform: translateZ(3px);
+}
+#magazine.book .hard_cover.show_corner .hard_cover_rotator {
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  /* IE 9 */
+  -webkit-transform-origin: 0 0;
+  /* Safari and Chrome */
+  -webkit-transform-style: preserve-3d;
+  /* Chrome, Safari, Opera */
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  -webkit-transform: rotateY(10deg) translateZ(1px);
+  /* Chrome, Safari, Opera */
+  transform: rotateY(10deg) translateZ(1px);
 }
 #magazine .flip_left.on_left .shadow_holder {
   width: 0;

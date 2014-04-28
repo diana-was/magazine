@@ -54,7 +54,7 @@ Version: 1.0
        margin: 0 auto 0 15%;
     }
     
-    #imageHolder {
+    #innerHolder {
         .box-sizing(content-box);
         position: absolute;
         top: 0px;
@@ -83,7 +83,6 @@ Version: 1.0
 
 
 #magazine{
-    .box-sizing(content-box);
     
     .leaf {
         //position: relative;
@@ -102,6 +101,7 @@ Version: 1.0
             display: none;
         }
     }
+    
     .show_corner, .show_page {
         .right_page_holder {
             overflow: hidden;
@@ -116,20 +116,6 @@ Version: 1.0
             z-index : initial!important;
         }
         
-    }
-    
-    &.book {
-        .hard_cover.show_corner {
-            .hard_cover_rotator {
-                .rotate-page(10deg,0,0,visible);
-            }
-        }
-        
-        .hard_cover.flip_left.show_corner {
-            .hard_cover_rotator {
-                //.rotate-page(170deg,0,0,visible,-1px);
-            }
-        }
     }
     
     // Front page - right page
@@ -596,7 +582,6 @@ Version: 1.0
     }
     
     
-        
     .flip_left {
         //          ||           \\
         //          ||            \\
@@ -691,6 +676,7 @@ Version: 1.0
                 .rotate-page(180deg,0,0,visible); 
             }
         }
+        
         .back_cover.flip_left {
             .hard_cover_rotator {
                 .rotate-page(180deg,0,0,visible,-1px);  //for safari
@@ -699,7 +685,20 @@ Version: 1.0
                 .z-pixel(3px);
             }
         }
+        
+        .hard_cover.show_corner {
+            .hard_cover_rotator {
+                .rotate-page(10deg,0,0,visible);
+            }
+        }
+        
+        .hard_cover.flip_left.show_corner {
+            .hard_cover_rotator {
+                //.rotate-page(170deg,0,0,visible,-1px);
+            }
+        }
     }
+        
     
     .flip_left.on_left {
         .shadow_holder {

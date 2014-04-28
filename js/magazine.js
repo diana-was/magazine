@@ -52,7 +52,6 @@
     // element function
     $.fn.magazine = function(options) {
         var $this       = $(this),
-            $imageHolder= null,
             page        = 0,
             $lastLeaf   = null,
             $frontCover = false,
@@ -102,7 +101,7 @@
             settings.container.append('<section id="viewZone">'+
                                         '<div id="magazineDesk" class="desk">'+
                                             '<div class="magazine_help">Click on the top (right/left) corner to flip the page</div>'+
-                                            '<div id="imageHolder">'+
+                                            '<div id="innerHolder">'+
                                                 '<div id="magazineHolder">'+
                                                     '<div id="magazine" class="'+(settings.hardcover?'book':'soft')+'"></div>'+
                                                 '</div>'+
@@ -110,7 +109,6 @@
                                         '</div>'+
                                     '</section>');
             $magazine = $('#magazine');
-            $imageHolder = $('#imageHolder');
         }
 
         function createLeaf(coverClass) {
