@@ -23,7 +23,6 @@
                 var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
                 if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {
                     e.preventDefault();
-                    console.log('in');
                     return;
                 }
                 return true;
@@ -47,6 +46,25 @@
     $.fn.scrollParent = function () {
         this.off('mousewheel.noScroll DOMMouseScroll.noScroll');
         this.off('keydown.noScroll');
+    };
+    
+    $.fn.dontScrollSideways = function () {
+        this
+            .off('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways')
+            .on('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways', function (e) {
+                var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+                if (delta < 0 && $(this).scrollLeft() > 0) {
+                    e.preventDefault();
+                    //e.stopPropagation();
+                    $(this).scrollLeft(0);
+                    return;
+                }
+                return true;
+            });
+    };
+
+    $.fn.scrollSideways = function () {
+        this.off('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways');
     };
     
     // element function
@@ -157,7 +175,7 @@
                                             '<div class="left_page_gradient"></div>' +
                                        '</div>' +
                                     '</div>' +
-                                '</div>'+     
+                                '</div>'+
                                 '<div class="flip_corner" style="z-index:'+ (index+3) +'"></div>' +
                        '</div>',
                     $leaf = isPage?$(html):$(htmlCover);
@@ -178,35 +196,35 @@
             switch (side)
             {
                 case 'l' :  $page = $leaf.find('.left_page');
-                            $page.data('title',(title?title:'Page '+$page.data('page')));
-                            $page.data('image',image);
-                            $page.data('type',type);
+                            $page.data('title',(title?title:'Page '+$page.data('page')))
+                                .data('image',image)
+                                .data('type',type);
                             if ($p.length > 0) {
                                 $page.prepend($p);
                             }
                             page++;
                             break;
                 case 'r' :  $page = $leaf.find('.right_page');
-                            $page.data('title',(title?title:'Page '+$page.data('page')));
-                            $page.data('image',image);
-                            $page.data('type',type);
+                            $page.data('title',(title?title:'Page '+$page.data('page')))
+                                .data('image',image)
+                                .data('type',type);
                             if ($p.length > 0) {
                                 $page.prepend($p);
                             }
                             page++;
                             break;
                 case 'b' :  $page = $leaf.find('.left_page');
-                            $page.data('title',(title?title+' 1':'Page '+$page.data('page')));
-                            $page.data('image',image);
-                            $page.data('type',type);
+                            $page.data('title',(title?title+' 1':'Page '+$page.data('page')))
+                                .data('image',image)
+                                .data('type',type);
                             if ($p.length > 0) {
                                 $page.prepend($p);
                             }
                             page++;
                             $page = $rleaf.find('.right_page');
-                            $page.data('title',(title?title+' 2':'Page '+$page.data('page')));
-                            $page.data('image',image);
-                            $page.data('type',type);
+                            $page.data('title',(title?title+' 2':'Page '+$page.data('page')))
+                                .data('image',image)
+                                .data('type',type);
                             if ($p.length > 0) {
                                 $page.prepend($p.clone());
                             }
@@ -231,26 +249,25 @@
                 if (typeof(e.pageX) !== 'undefined' && $.manageMagazine.isFlipping()) { return; }
                 
                 // Start turning page
-                var $this = $(this),
-                    $leaf = $this.parent(".leaf"),
-                    leafNo = $leaf.data('leaf'),
-                    right = !$leaf.hasClass("flip_left");
+                var $this   = $(this),
+                    $leaf   = $this.parent(".leaf"),
+                    leafNo  = $leaf.data('leaf'),
+                    right   = !$leaf.hasClass("flip_left");
 
                 if (typeof(e.pageX) !== 'undefined') { $.manageMagazine.flipOn($this); }
                 //$leaf.find('.right_page_rotator').css('z-index','initial');
                 //$leaf.css('z-index',$leaf.data("rightindex"));
-                $.manageMagazine.changeIndex($leaf,'f')
+                $.manageMagazine.changeIndex($leaf,'f');
                 
                 if (right) {
+                    $leaf.addClass("show_page flip_left");
                     if(typeof(e.pageX) !== 'undefined') { $.manageMagazine.loadPage($leaf.find('.left_page')); }
-                    $leaf.addClass('show_page').addClass("flip_left");
                     window.setTimeout($.manageMagazine.changeIndex,timerFlipMs,$leaf,'l');
                 }
                 else {
                     if(typeof(e.pageX) !== 'undefined') { $.manageMagazine.loadPage($leaf.find('.right_page')); }
-                    $leaf.removeClass('on_left').removeClass("flip_left");
-                    window.setTimeout($.manageMagazine.removeMyClass,timerFlipMs,$leaf,'show_page');
-                    window.setTimeout($.manageMagazine.changeIndex,timerFlipMs,$leaf,'r');
+                    $leaf.removeClass("on_left").removeClass("flip_left");
+                    window.setTimeout($.manageMagazine.changeIndex,timerFlipMs,$leaf,'r','show_page');
                 }
                 if (typeof(e.pageX) !== 'undefined') {window.setTimeout($.manageMagazine.flipOff,timerFlipMs);}
             });
@@ -288,7 +305,7 @@
             
             $magazine.find('.left_page').dontScrollParent();
             $magazine.find('.right_page').dontScrollParent();
-
+            $('body').dontScrollSideways();
         }
  
         function boundMagazine () {
@@ -431,27 +448,25 @@
         }
         
         /* Work the magic */
-        if (totalPages > 0) {
-            totalPages += settings.hardcover?10:4; //blank pages content and cover
+        totalPages += settings.hardcover?10:4; //blank pages content and cover
 
-            createMagazine();
-            boundMagazine ();
-            createContentPage ();
-            
-            // bind the corners with click function and load events
-            bindEvents ();
-            
-            // load images in page 1
-            $.manageMagazine.loadPage(1);
+        createMagazine();
+        boundMagazine ();
+        createContentPage ();
+        
+        // bind the corners with click function and load events
+        bindEvents ();
+        
+        // load images in page 1
+        $.manageMagazine.loadPage(1);
 
-            // bind window resize
-            $window.resize(function(){ $.manageMagazine.getMagResize(settings.container); })      //call our function on window resize
-            .on('orientationchange', function(){ $.manageMagazine.getMagResize(settings.container); })
-            .resize();  //force a resize just to be sure 
-        }
-        else {
-            $magazine = $('<div></div>');
-        }
+        // bind window resize
+        $window.resize(function(){ $.manageMagazine.magazineResize(settings.container); })      //call our function on window resize
+        .on('orientationchange', function(){ $.manageMagazine.magazineResize(settings.container); })
+        .resize();  //force a resize just to be sure 
+
+        // finish 
+        settings.container.trigger('magazineCreated');
     };
     
     /* Convenience methods in jQuery namespace.  */
@@ -459,6 +474,7 @@
     
         var flipping        = false,
             $flip           = false,
+            goingTo         = false,
             magHldMrgOut    = 10,   // Vertical margin
             magHldPctOut    = true, // Margin percentage  
             magHldMrgIn     = 0,    // Vertical margin
@@ -578,12 +594,17 @@
             
             // clean-up parameters
             number *= 1;
-            timerMs = (typeof(timerMs) === 'undefined')?0:timerMs*1;
+            timerMs = (typeof(timerMs) === 'undefined')?10:timerMs*1;
             level   = (typeof(level) === 'undefined')?0:level*1;
 
+            if ((level === 0) && goingTo) {
+                return;
+            }
+            
             if ((number < 1) || (number > totalPages)) {
                 return timerMs;
             }
+            goingTo = true;
             
             var rPage = $("#magazine .right_page[data-page='"+number+"']"),
                 lPage = $("#magazine .left_page[data-page='"+number+"']"),
@@ -611,7 +632,7 @@
                     //if it is a right page we need to flip the page to see it
                     if (right) {
                         window.setTimeout($.manageMagazine.flipCorner,timerMs,$leaf);
-                        timerMs += timerFlipMs;
+                        timerMs += timerFlipMs+5;
                     }
                 }
                 // Page is on the right of the magazine. Flip the pages till here
@@ -626,13 +647,15 @@
                     }
                     //if it is a left page we need to flip the page to see it
                     if (!right) {
-                        window.setTimeout($.manageMagazine.flipCorner,timerMs,$leaf);
                         $leaf.addClass('show_page');
-                        timerMs += timerFlipMs;
+                        window.setTimeout($.manageMagazine.flipCorner,timerMs,$leaf);
+                        timerMs += timerFlipMs+5;
                     }
                 }
             }
-            
+            if (level === 0) {
+                window.setTimeout($.manageMagazine.goingEnd,timerMs);
+            }
             return timerMs;
         },
 
@@ -666,6 +689,10 @@
                 magHldPctIn  = settings.magHldMrgIn.indexOf('%') !== -1;
             },
             
+            goingEnd : function() {
+                goingTo = false;
+            },
+
             isFlipping : function() {
                 return     flipping;
             },
@@ -696,7 +723,11 @@
              * $obj : html obj
              * side : r,l or f
              */
-            changeIndex : function ($obj,side) { 
+            changeIndex : function ($obj,side,myClass) {
+                if (typeof myClass !== 'undefined') {
+                    $.manageMagazine.removeMyClass($obj,myClass);
+                }
+
                 var index = (side === 'l')?$obj.data("leftindex"):$obj.data('rightindex');
                 $obj.children(".flip_corner").css('z-index',index+3);
                 $obj.css("z-index",index);
@@ -743,13 +774,13 @@
                 return _getIndex();
             },
             
-            getMagResize: function($container) {
+            magazineResize: function($container) {
                 var  h = $window.height() - (magHldPctOut?($window.height() * magHldMrgOut / 100):magHldMrgOut) - (magHldPctIn?($window.height() * magHldMrgIn / 100):magHldMrgIn),
                      w = ($container.width() > 0)?$container.width():$window.width(),
                      wx = Math.round(h/magRatio) * 2,
                      wt = ((wx < w)?Math.round(wx * 100 / w):100);
                $('#viewZone').css('width',wt+'%');
-               $document.trigger('magazineResize');
+               $document.trigger('magazineResizeFinish');
             }
         };
     }();

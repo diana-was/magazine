@@ -21,7 +21,6 @@ Version: 1.0
 }
  
 #viewZone {
-//  max-width: @viewZone;
     height: auto;
     position: relative;
     margin-left: auto;
@@ -115,7 +114,6 @@ Version: 1.0
         .right_page_rotator {
             z-index : initial!important;
         }
-        
     }
     
     // Front page - right page
@@ -174,8 +172,10 @@ Version: 1.0
             }
             
             [data-type] {
-                border: 1px solid @gray;
-                background: @bodyBackground;
+                width       : 100%;
+                min-height  : 100%;
+                border      : 1px solid @gray;
+                background  : @bodyBackground;
             }
             
             [data-type="double"] {
@@ -235,6 +235,7 @@ Version: 1.0
         // ----------------------
         width: @flipZoneWidth;
         height: @flipZoneHeight;
+        display:none;
         overflow: hidden;
         
         > div.left_page {
@@ -263,8 +264,10 @@ Version: 1.0
             }
             
             [data-type] {
-                border: 1px solid @gray;
-                background: @bodyBackground;
+                width       : 100%;
+                min-height  : 100%;
+                border      : 1px solid @gray;
+                background  : @bodyBackground;
             }
             
             [data-type="double"] {
@@ -455,12 +458,12 @@ Version: 1.0
                     overflow: hidden;
                     margin : 0;
                     padding: @magMarginH @magMargin;
-                    background: 0 0 no-repeat @bodyBackground;
+                    background: 0 0 no-repeat transparent;
                     background-size: cover;
                     
                     [data-type] {
                         border: none;
-                        background: @bodyBackground;
+                        background: transparent;
                     }
                     
                     > div.right_page_gradient {
@@ -503,11 +506,12 @@ Version: 1.0
                     overflow: hidden;
                     margin : 0;
                     padding: @magMarginH @magMargin;
-                    background: 0 0 no-repeat @bodyBackground;
+                    background: 0 0 no-repeat transparent;
                     background-size: cover;
                     
                     [data-type] {
                         border: none;
+                        background: transparent;
                     }
                     
                     > div.left_page_gradient {
@@ -678,12 +682,12 @@ Version: 1.0
         }
         
         .back_cover.flip_left {
-            .hard_cover_rotator {
-                .rotate-page(180deg,0,0,visible,-1px);  //for safari
-            } 
             .flip_corner {
                 .z-pixel(3px);
             }
+            .hard_cover_rotator {
+                .rotate-page(180deg,0,0,visible,-1px);  //for safari
+            } 
         }
         
         .hard_cover.show_corner {
@@ -692,11 +696,18 @@ Version: 1.0
             }
         }
         
-        .hard_cover.flip_left.show_corner {
+        .front_cover.flip_left.show_corner {
             .hard_cover_rotator {
-                //.rotate-page(170deg,0,0,visible,-1px);
+                .rotate-page(170deg,0,0,visible);
             }
         }
+        
+        .back_cover.flip_left.show_corner {
+            .hard_cover_rotator {
+                .rotate-page(170deg,0,0,visible,-1px);
+            }
+        }
+
     }
         
     
