@@ -5183,37 +5183,25 @@ body {
   width: 100%;
   height: 100%;
 }
-/* line 252, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineSection #magazine #magazineIndex {
-  height: auto;
-}
-/* line 255, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 254, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex > h3 {
   text-align: center;
 }
-/* line 259, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineSection #magazine #magazineIndex > ul {
-  display: block;
-}
-/* line 263, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 261, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex > ul a:hover,
 #magazineSection #magazine #magazineIndex > ul a:focus {
   color: #eeeeee;
   background-color: #222222;
 }
-/* line 269, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 267, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex > ul a span.pagenumber {
   float: right;
 }
-/* line 275, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
-#magazineSection #magazine #magazineIndex img {
-  width: 15%;
-}
-/* line 279, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 273, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex .nav-pills > li > a {
   border-radius: 0;
 }
-/* line 281, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 275, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #magazineSection #magazine #magazineIndex .nav-pills > li > a:active,
 #magazineSection #magazine #magazineIndex .nav-pills > li > a.active {
   border-color: #222222;

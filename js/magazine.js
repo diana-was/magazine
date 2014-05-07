@@ -1,6 +1,8 @@
 /*
  * This plugin Manage the magazine
- * 
+ * Author: Diana De Vargas Soler
+ * Author URI: 
+ * Version: 1.0
  * images url in data-src to lazy loading
  */
 
@@ -14,23 +16,120 @@
         timerFlipMs = 2000,
         firstLeafNo = false,
         lastLeafNo  = false,
-        contentPage = false;
- 
-    $.fn.dontScrollParent = function () {
+        contentPage = false,
+        $contentHolder = false,
+        scrollEvents=["DOMMouseScroll","mousewheel"];
+    
+    /*
+     *  This scrollElement method is from mousewheel plugin by Brandon Aaron (http://brandonaaron.net)
+     */  
+    function scrollElement(event){
+        var orgEvent = event || window.event, args = [].slice.call( arguments, 1 ), delta = 0, returnValue = true, deltaX = 0, deltaY = 0;
+        event = $.event.fix(orgEvent);
+        event.type = "mousewheel";
+       
+        // Old school scrollwheel delta
+        if ( orgEvent.wheelDelta ) { delta = orgEvent.wheelDelta/120; }
+        if ( orgEvent.detail ) { delta = -orgEvent.detail/3; }
+       
+        // New school multidimensional scroll (touchpads) deltas
+        deltaY = delta;
+       
+        // Gecko
+        if ( orgEvent.axis !== undefined && orgEvent.axis === orgEvent.HORIZONTAL_AXIS ) {
+           deltaY = 0;
+           deltaX = -1*delta;
+        }
+       
+        // Webkit
+        if ( orgEvent.wheelDeltaY !== undefined ) { deltaY = orgEvent.wheelDeltaY/120; }
+        if ( orgEvent.wheelDeltaX !== undefined ) { deltaX = -1*orgEvent.wheelDeltaX/120; }
+       
+        // Add event and delta to the front of the arguments
+        args.unshift(event, delta, deltaX, deltaY);
+       
+        return ($.event.dispatch || $.event.handle).apply(this, args);
+    }
+
+    $.event.special.mousewheel = {
+        setup   :function(){
+                    if(this.addEventListener){
+                        for(var d=scrollEvents.length;d;){
+                            this.addEventListener(scrollEvents[--d],scrollElement,false);
+                        }
+                    }
+                    else{
+                        this.onmousewheel=scrollElement;
+                    }
+                },
+        teardown:function(){
+                    if(this.removeEventListener){
+                        for(var d=scrollEvents.length;d;){
+                            this.removeEventListener(scrollEvents[--d],scrollElement,false);
+                        }
+                    }
+                    else{
+                        this.onmousewheel=null;
+                    }
+                }
+    };
+    
+    $.fn.extend({
+        mousewheel:function(d){
+                        return d?this.bind("mousewheel",d):this.trigger("mousewheel");
+                    },
+        unmousewheel:function(d){
+                        return this.unbind("mousewheel",d);
+                    }
+    });
+    
+    /*
+     * Scroll in the Element and stop the body element scrolling
+     */  
+    $.fn.scrollThisElement = function () {
         this
-            .off('mousewheel.noScroll DOMMouseScroll.noScroll')
-            .on('mousewheel.noScroll DOMMouseScroll.noScroll', function (e) {
-                var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-                if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {
-                    e.preventDefault();
-                    return;
+            .off('mousewheel.scrollThisElement DOMMouseScroll.scrollThisElement')
+            .on('mousewheel.scrollThisElement DOMMouseScroll.scrollThisElement', function(event, delta, deltaX, deltaY) {
+                var nativeEvent = (typeof delta === 'undefined');
+                if (nativeEvent) {
+                    var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+                }
+                else {
+                    var scrollTop = $(this).scrollTop();
+                    $(this).scrollTop(scrollTop-Math.round(delta * 20));
+                }
+                
+                // Detail to hide content overflow
+                if ($(this).data('page') === contentPage) {
+                    var h = Math.round($contentHolder.height()*1/100 + 1);
+                    if ($(this).scrollTop() > h) {
+                        if ($(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {
+                            $(this).css('border-top-width',h+'px').css('border-bottom-width','0');
+                        } else {
+                            $(this).css('border-top-width',h+'px').css('border-bottom-width',h+'px');
+                        }
+                    }
+                    else {
+                        $(this).css('border-top-width','0').css('border-bottom-width',h+'px');
+                    }
+                }
+
+                // Prevent scrolling the body
+                if (nativeEvent) {
+                    if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {
+                        event.preventDefault();
+                        return;
+                    }
+                }
+                else {
+                    event.preventDefault();
                 }
                 return true;
             });
 
         this
-            .off('keydown.noScroll')
-            .on('keydown.noScroll', function (e) {
+            .off('keydown.scrollThisElement')
+            .on('keydown.scrollThisElement', function (e) {
                 if ((e.which === 40) && $(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {  // Down 
                     e.preventDefault();
                     return;
@@ -44,10 +143,10 @@
     };
 
     $.fn.scrollParent = function () {
-        this.off('mousewheel.noScroll DOMMouseScroll.noScroll');
-        this.off('keydown.noScroll');
+        this.off('mousewheel.scrollThisElement DOMMouseScroll.scrollThisElement');
+        this.off('keydown.scrollThisElement');
     };
-    
+ 
     $.fn.dontScrollSideways = function () {
         this
             .off('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways')
@@ -55,7 +154,6 @@
                 var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
                 if (delta < 0 && $(this).scrollLeft() > 0) {
                     e.preventDefault();
-                    //e.stopPropagation();
                     $(this).scrollLeft(0);
                     return;
                 }
@@ -66,15 +164,18 @@
     $.fn.scrollSideways = function () {
         this.off('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways');
     };
-    
-    // element function
+
+    /*
+     * This is the main plugin : this generates the Magazine
+     */
     $.fn.magazine = function(options) {
         var $this       = $(this),
             page        = 0,
             $lastLeaf   = null,
             $frontCover = false,
             $backCover  = false,
-            $contentPage= false,
+            $contentIndex= false,
+            $contentPage = false,
             settings    = {
                 container       : $('body'),         //container for the magazine
                 load            : false,             //load the images and trigger a loadpage event to children
@@ -303,14 +404,18 @@
                 });
             }
             
-            $magazine.find('.left_page').dontScrollParent();
-            $magazine.find('.right_page').dontScrollParent();
             $('body').dontScrollSideways();
+            $magazine.find('.left_page').scrollThisElement();
+            $magazine.find('.right_page').scrollThisElement();
         }
  
         function boundMagazine () {
             // Attache front cover and first blank leaf
             page = 0;
+            var $contentWraper = $( '<'+settings.contentMarkup.wrapperTag+' id="magazineIndex" data-title="content" data-type="content" class="'+settings.contentMarkup.wrapperClass+'">'+
+                                '<'+settings.contentMarkup.titleTag+' class="'+settings.contentMarkup.titleClass+'">Content</'+settings.contentMarkup.titleTag+'>'+
+                                '<'+settings.contentMarkup.groupTag+' class="'+settings.contentMarkup.groupClass+'"></'+settings.contentMarkup.groupTag+'>'+
+                                '</'+settings.contentMarkup.wrapperTag+'>');
             
             if (settings.hardcover) {
                 $lastLeaf = createLeaf('front_cover');
@@ -330,13 +435,9 @@
 
                 // Content page
                 $lastLeaf = createLeaf();
-                attachPage($('<'+settings.contentMarkup.wrapperTag+' id="magazineIndex" data-title="content" data-type="content" class="'+settings.contentMarkup.wrapperClass+'">'+
-                                '<'+settings.contentMarkup.titleTag+' class="'+settings.contentMarkup.titleClass+'">Content</'+settings.contentMarkup.titleTag+'>'+
-                                '<'+settings.contentMarkup.groupTag+' class="'+settings.contentMarkup.groupClass+'"></'+settings.contentMarkup.groupTag+'>'+
-                                '</'+settings.contentMarkup.wrapperTag+'>'), $lastLeaf, 'r');
+                attachPage($contentWraper, $lastLeaf, 'r');
                 attachPage($('<div data-title="" data-type="endpaper"></div>'), $lastLeaf, 'l');
-                $contentPage = $lastLeaf.find('#magazineIndex '+settings.contentMarkup.groupTag);
-                contentPage = $lastLeaf.find('.right_page').data('page');
+                $contentPage    = $lastLeaf.find('.right_page');
             }
             else {
                 $lastLeaf = createLeaf();
@@ -349,13 +450,12 @@
                 }
 
                 // Content page
-                attachPage($('<'+settings.contentMarkup.wrapperTag+' id="magazineIndex" data-title="content" data-type="content" class="'+settings.contentMarkup.wrapperClass+'">'+
-                                '<'+settings.contentMarkup.titleTag+' class="'+settings.contentMarkup.titleClass+'">Content</'+settings.contentMarkup.titleTag+'>'+
-                                '<'+settings.contentMarkup.groupTag+' class="'+settings.contentMarkup.groupClass+'"></'+settings.contentMarkup.groupTag+'>'+
-                                '</'+settings.contentMarkup.wrapperTag+'>'), $lastLeaf, 'l');
-                $contentPage = $lastLeaf.find('#magazineIndex '+settings.contentMarkup.groupTag);
-                contentPage = $lastLeaf.find('.left_page').data('page');
+                attachPage($contentWraper, $lastLeaf, 'l');
+                $contentPage    = $lastLeaf.find('.left_page');
             }
+            contentPage     = $contentPage.data('page');
+            $contentHolder  = $contentPage.parent();
+            $contentIndex   = $contentPage.find('#magazineIndex '+settings.contentMarkup.groupTag);
             
             // Attache pages to magazine
             $this.each(function() {
@@ -439,9 +539,9 @@
             $.each(index, function(id, page) {
                 var title = (page.title === 'Page '+page.pageNo)?'<span class="title"></span>':'<span class="title">'+ page.title +'</span>',
                     image = (page.image.length > 0)?'<img src="'+ page.image +'" class="img-rounded" alt="'+ page.title +'">':'';
-                $contentPage.append('<'+settings.contentMarkup.itemTag+' class="'+settings.contentMarkup.itemClass+'"><a href="#" class="magazine_link" data-page="'+ page.pageNo +'">' + image + title +'<span class="pagenumber">'+ page.pageNo +'</span></a></'+settings.contentMarkup.itemTag+'>');
+                $contentIndex.append('<'+settings.contentMarkup.itemTag+' class="'+settings.contentMarkup.itemClass+'"><a href="#" class="magazine_link" data-page="'+ page.pageNo +'">' + image + title +'<span class="pagenumber">'+ page.pageNo +'</span></a></'+settings.contentMarkup.itemTag+'>');
             });
-            $contentPage.find('a.magazine_link').click(function(e){
+            $contentIndex.find('a.magazine_link').click(function(e){
                 e.preventDefault();
                 $.manageMagazine.goToPage($(this).data('page'));
             });
@@ -468,8 +568,13 @@
         // finish 
         settings.container.trigger('magazineCreated');
     };
+  
     
-    /* Convenience methods in jQuery namespace.  */
+    /*
+     *  This method manage the actions in the magazin
+     *  like go to page, load a page, flip a page
+     *  
+     */
      $.manageMagazine = function () {
     
         var flipping        = false,
