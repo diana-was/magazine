@@ -435,6 +435,13 @@ Version: 1.0
                 height: @magInHeight;
                 position: absolute;
             }
+
+            .flip_corner {
+                .rotate-visibility(visible);
+                height: 100%;
+                // reset all settings
+                top: 0;
+            }
             
             .right_cover_holder {
                 // ---------------------
@@ -448,6 +455,11 @@ Version: 1.0
                 height: @magInHeight;
                 position: absolute;
                 .rotate-visibility(hidden);
+                
+                .flip_corner {
+                    left:auto;
+                    right:0;
+                }
         
                 > div.right_page {
                 
@@ -498,6 +510,12 @@ Version: 1.0
                 position: absolute;
                 .rotate-page(180deg,50%,50%,visible);
         
+                
+                .flip_corner {
+                    left:0;
+                    right:auto;
+                }
+
                 > div.left_page {
 
                     border: none;
@@ -537,22 +555,11 @@ Version: 1.0
                 
             }
             
-            .flip_corner {
-                //.z-pixel(2px);
-                .rotate-visibility(visible);
-                height: 100%;
-                
-                &:hover {
-                    cursor: pointer;
-                }
-                
-            }
-            
         }
     
         .front_cover {
              .hard_cover_rotator {
-                .open-close-book(0,0,0,@flipTimer,visible,1px);  //for safari
+                .open-close-book(0,0,0,@flipTimer,visible,2px);  //for safari
             } 
             
             .right_cover_holder {
@@ -571,7 +578,7 @@ Version: 1.0
         
         .back_cover {
             .hard_cover_rotator {
-                .open-close-book(0,0,0,@flipTimer,visible,-1px);  //for safari
+                .open-close-book(0,0,0,@flipTimer,visible,1px);  //for safari
             } 
             
             .right_cover_holder {
@@ -679,6 +686,23 @@ Version: 1.0
     }
 
     &.book {
+ 
+        .hard_cover.show_corner {
+            .right_cover_holder {
+                .flip_corner {
+                    left:auto;
+                    right:0;
+                }
+            }
+            
+            .left_cover_holder {
+                .flip_corner {
+                    left:0;
+                    right:auto;
+                }
+            }
+        }
+                
         .front_cover.flip_left {
             .hard_cover_rotator {
                 .rotate-page(-180deg,0,0,visible); 
@@ -686,11 +710,8 @@ Version: 1.0
         }
         
         .back_cover.flip_left {
-            .flip_corner {
-               //.z-pixel(2px);
-            }
             .hard_cover_rotator {
-                .rotate-page(-180deg,0,0,visible,-1px);  //for safari
+                .rotate-page(-180deg,0,0,visible,1px);  //for safari
             } 
         }
         
@@ -708,7 +729,7 @@ Version: 1.0
         
         .back_cover.flip_left.show_corner {
             .hard_cover_rotator {
-                .rotate-page(-170deg,0,0,visible,-1px);    //for safari
+                .rotate-page(-170deg,0,0,visible,1px);    //for safari
             }
         }
 

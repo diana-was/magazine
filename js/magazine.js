@@ -252,14 +252,15 @@
                                         '<div class="right_page" data-page="'+ (pages) +'">' +
                                             '<div class="right_page_gradient"></div>' +
                                         '</div>' +
+                                        '<div class="flip_corner" style="z-index:"z-index:inherit"></div>' +
                                     '</div>' +
                                     '<div class="left_cover_holder" style="z-index:inherit">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
                                        '</div>' +
+                                       '<div class="flip_corner" style="z-index:"z-index:inherit"></div>' +
                                     '</div>' +
                                 '</div>'+
-                                '<div class="flip_corner" style="z-index:'+ (index+3) +'"></div>' +
                        '</div>',
                     $leaf = isPage?$(html):$(htmlCover);
                 $magazine.append($leaf);
@@ -333,7 +334,7 @@
                 
                 // Start turning page
                 var $this   = $(this),
-                    $leaf   = $this.parent(".leaf"),
+                    $leaf   = $this.closest(".leaf"),
                     leafNo  = $leaf.data('leaf'),
                     right   = !$leaf.hasClass("flip_left");
 
@@ -802,7 +803,12 @@
             },
             
             flipCorner : function ($leaf){
-                $leaf.children(".flip_corner").click();
+                if ($leaf.hasClass("hard_cover")) {
+                    $leaf.find(".right_cover_holder").children(".flip_corner").click();
+                }
+                else {
+                    $leaf.children(".flip_corner").click();
+                }
             },
             
             /**

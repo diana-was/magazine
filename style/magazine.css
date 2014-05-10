@@ -458,6 +458,13 @@ Version: 1.0
   height: 100%;
   position: absolute;
 }
+#magazine.book .hard_cover .flip_corner {
+  -webkit-backface-visibility: visible;
+  /* Chrome, Safari, Opera */
+  backface-visibility: visible;
+  height: 100%;
+  top: 0;
+}
 #magazine.book .hard_cover .right_cover_holder {
   width: 100%;
   height: 100%;
@@ -465,6 +472,10 @@ Version: 1.0
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
+}
+#magazine.book .hard_cover .right_cover_holder .flip_corner {
+  left: auto;
+  right: 0;
 }
 #magazine.book .hard_cover .right_cover_holder > div.right_page {
   position: relative;
@@ -519,6 +530,10 @@ Version: 1.0
   /* Chrome, Safari, Opera */
   transform: rotateY(180deg) translateZ(1px);
 }
+#magazine.book .hard_cover .left_cover_holder .flip_corner {
+  left: 0;
+  right: auto;
+}
 #magazine.book .hard_cover .left_cover_holder > div.left_page {
   border: none;
   box-shadow: 0 0 3% rgba(0, 0, 0, 0.5);
@@ -558,15 +573,6 @@ Version: 1.0
   top: 0;
   right: 0;
 }
-#magazine.book .hard_cover .flip_corner {
-  -webkit-backface-visibility: visible;
-  /* Chrome, Safari, Opera */
-  backface-visibility: visible;
-  height: 100%;
-}
-#magazine.book .hard_cover .flip_corner:hover {
-  cursor: pointer;
-}
 #magazine.book .front_cover .hard_cover_rotator {
   position: absolute;
   -ms-transform-origin: 0 0;
@@ -580,9 +586,9 @@ Version: 1.0
   -webkit-backface-visibility: visible;
   /* Chrome, Safari, Opera */
   backface-visibility: visible;
-  -webkit-transform: rotateY(0) translateZ(1px);
+  -webkit-transform: rotateY(0) translateZ(2px);
   /* Chrome, Safari, Opera */
-  transform: rotateY(0) translateZ(1px);
+  transform: rotateY(0) translateZ(2px);
   -ms-transition-duration: 2s;
   -webkit-transition-duration: 2s;
   transition-duration: 2s;
@@ -617,9 +623,9 @@ Version: 1.0
   -webkit-backface-visibility: visible;
   /* Chrome, Safari, Opera */
   backface-visibility: visible;
-  -webkit-transform: rotateY(0) translateZ(-1px);
+  -webkit-transform: rotateY(0) translateZ(1px);
   /* Chrome, Safari, Opera */
-  transform: rotateY(0) translateZ(-1px);
+  transform: rotateY(0) translateZ(1px);
   -ms-transition-duration: 2s;
   -webkit-transition-duration: 2s;
   transition-duration: 2s;
@@ -699,6 +705,14 @@ Version: 1.0
   right: auto;
   left: -100%;
 }
+#magazine.book .hard_cover.show_corner .right_cover_holder .flip_corner {
+  left: auto;
+  right: 0;
+}
+#magazine.book .hard_cover.show_corner .left_cover_holder .flip_corner {
+  left: 0;
+  right: auto;
+}
 #magazine.book .front_cover.flip_left .hard_cover_rotator {
   -ms-transform-origin: 0 0;
   /* IE 9 */
@@ -727,9 +741,9 @@ Version: 1.0
   -webkit-backface-visibility: visible;
   /* Chrome, Safari, Opera */
   backface-visibility: visible;
-  -webkit-transform: rotateY(-180deg) translateZ(-1px);
+  -webkit-transform: rotateY(-180deg) translateZ(1px);
   /* Chrome, Safari, Opera */
-  transform: rotateY(-180deg) translateZ(-1px);
+  transform: rotateY(-180deg) translateZ(1px);
 }
 #magazine.book .hard_cover.show_corner .hard_cover_rotator {
   -ms-transform-origin: 0 0;
@@ -775,9 +789,9 @@ Version: 1.0
   -webkit-backface-visibility: visible;
   /* Chrome, Safari, Opera */
   backface-visibility: visible;
-  -webkit-transform: rotateY(-170deg) translateZ(-1px);
+  -webkit-transform: rotateY(-170deg) translateZ(1px);
   /* Chrome, Safari, Opera */
-  transform: rotateY(-170deg) translateZ(-1px);
+  transform: rotateY(-170deg) translateZ(1px);
 }
 #magazine .flip_left.on_left .shadow_holder {
   width: 0;
