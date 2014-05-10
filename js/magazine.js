@@ -13,7 +13,7 @@
         $magazine   = null,
         totalPages  = 0,
         magRatio    = 2/3, //2/3, //4/3,
-        timerFlipMs = 2000,
+        timerFlipMs = 2005,
         firstLeafNo = false,
         lastLeafNo  = false,
         contentPage = false,
@@ -104,7 +104,7 @@
                     var h = Math.round($contentHolder.height()*1/100 + 1);
                     if ($(this).scrollTop() > h) {
                         if ($(this).scrollTop() >= this.scrollHeight - $(this).innerHeight()) {
-                            $(this).css('border-top-width',h+'px').css('border-bottom-width','0');
+                            $(this).css('border-top-width',h+'px').css('border-bottom-width',h+'px'); // for firefox
                         } else {
                             $(this).css('border-top-width',h+'px').css('border-bottom-width',h+'px');
                         }
@@ -147,24 +147,6 @@
         this.off('keydown.scrollThisElement');
     };
  
-    $.fn.dontScrollSideways = function () {
-        this
-            .off('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways')
-            .on('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways', function (e) {
-                var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-                if (delta < 0 && $(this).scrollLeft() > 0) {
-                    e.preventDefault();
-                    $(this).scrollLeft(0);
-                    return;
-                }
-                return true;
-            });
-    };
-
-    $.fn.scrollSideways = function () {
-        this.off('mousewheel.noScrollSideways DOMMouseScroll.noScrollSideways');
-    };
-
     /*
      * This is the main plugin : this generates the Magazine
      */
@@ -247,7 +229,7 @@
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="left_page_rotator" style="z-index:inherit">' +
+                                '<div class="left_page_rotator" style="z-index:inherit">' + 
                                     '<div class="left_page_holder">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
@@ -336,7 +318,7 @@
         
         function bindEvents () {
             /* Show the corner fliped */
-            $("#magazine .flip_corner").hover(function (e) {
+            $magazine.find(".flip_corner").hover(function (e) {
                 e.preventDefault();
                 $(this).parent(".leaf").addClass("show_corner");
             },function (e) {
@@ -345,7 +327,7 @@
             });
 
             /* flip the page back or ford */
-            $("#magazine .flip_corner").click(function (e) {
+            $magazine.find(".flip_corner").click(function (e) {
                 // If flip by mouse click and didn't finish turning page do nothing
                 if (typeof(e.pageX) !== 'undefined' && $.manageMagazine.isFlipping()) { return; }
                 
@@ -367,7 +349,7 @@
                 }
                 else {
                     if(typeof(e.pageX) !== 'undefined') { $.manageMagazine.loadPage($leaf.find('.right_page')); }
-                    $leaf.removeClass("on_left").removeClass("flip_left");
+                    $leaf.removeClass("on_left flip_left");
                     window.setTimeout($.manageMagazine.changeIndex,timerFlipMs,$leaf,'r','show_page');
                 }
                 if (typeof(e.pageX) !== 'undefined') {window.setTimeout($.manageMagazine.flipOff,timerFlipMs);}
@@ -404,7 +386,6 @@
                 });
             }
             
-            $('body').dontScrollSideways();
             $magazine.find('.left_page').scrollThisElement();
             $magazine.find('.right_page').scrollThisElement();
         }
@@ -530,7 +511,7 @@
 
             // no show last page shadow
             var lastShadow = (lastLeafNo > 1)?lastLeafNo - 1:1;
-            $("#magazine .leaf[data-leaf='"+lastShadow+"']").addClass('last_shadow');
+            $magazine.find(".leaf[data-leaf='"+lastShadow+"']").addClass('last_shadow');
         }
         
         function createContentPage () {
@@ -611,8 +592,8 @@
                 if ((number < 1) || (number > totalPages)) {
                     return;
                 }
-                rPage = $("#magazine .right_page[data-page='"+number+"']");
-                lPage = $("#magazine .left_page[data-page='"+number+"']");
+                rPage = $magazine.find(".right_page[data-page='"+number+"']");
+                lPage = $magazine.find(".left_page[data-page='"+number+"']");
             }
             
             // it is a right page
@@ -674,8 +655,8 @@
                 if ((number < 1) || (number > totalPages)) {
                     return;
                 }
-                rPage = $("#magazine .right_page[data-page='"+number+"']");
-                lPage = $("#magazine .left_page[data-page='"+number+"']");
+                rPage = $magazine.find(".right_page[data-page='"+number+"']");
+                lPage = $magazine.find(".left_page[data-page='"+number+"']");
             }
             
             // it is a right page
@@ -711,8 +692,8 @@
             }
             goingTo = true;
             
-            var rPage = $("#magazine .right_page[data-page='"+number+"']"),
-                lPage = $("#magazine .left_page[data-page='"+number+"']"),
+            var rPage = $magazine.find(".right_page[data-page='"+number+"']"),
+                lPage = $magazine.find(".left_page[data-page='"+number+"']"),
                 right = (rPage.length > 0),
                 $page = right?rPage:lPage;
 
@@ -726,7 +707,7 @@
                 // Page is on the left of the magazine. Flip the pages back till here
                 if ($leaf.hasClass("flip_left")) {
                     id      = $leaf.data('leaf')*1 + 1;
-                    $next   = $("#magazine .leaf[data-leaf='"+id+"']");
+                    $next   = $magazine.find(".leaf[data-leaf='"+id+"']");
                     
                     //if the next page is fliped on top we need to flip it
                     if (($next.length > 0)  && $next.hasClass("flip_left")) {
@@ -743,7 +724,7 @@
                 // Page is on the right of the magazine. Flip the pages till here
                 else {
                     id      = $leaf.data('leaf')*1 - 1;
-                    $prev    = $("#magazine .leaf[data-leaf='"+id+"']");
+                    $prev    = $magazine.find(".leaf[data-leaf='"+id+"']");
                     
                     // if the previous page is on top we need to flip it
                     if (($prev.length > 0) && !$prev.hasClass("flip_left")) {
@@ -834,7 +815,9 @@
                 }
 
                 var index = (side === 'l')?$obj.data("leftindex"):$obj.data('rightindex');
-                $obj.children(".flip_corner").css('z-index',index+3);
+                if (!$obj.hasClass("hard_cover")) {
+                    $obj.children(".flip_corner").css('z-index',index+3);
+                }
                 $obj.css("z-index",index);
 
                 if (side === 'l') {
@@ -885,6 +868,10 @@
                      wx = Math.round(h/magRatio) * 2,
                      wt = ((wx < w)?Math.round(wx * 100 / w):100);
                $('#viewZone').css('width',wt+'%');
+
+               // detail in the scrolling pages
+               $magazine.find("[data-page='"+contentPage+"']").scrollTop(0).css('border-top-width','0').css('border-bottom-width',Math.round($contentHolder.height()*1/100 + 1)+'px');
+
                $document.trigger('magazineResizeFinish');
             }
         };

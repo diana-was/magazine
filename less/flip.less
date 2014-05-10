@@ -172,7 +172,7 @@ Version: 1.0
             
             [data-type] {
                 width       : 100%;
-                height      : 100%;
+                height  : 100%;
                 border      : 1px solid @gray;
                 background  : @bodyBackground;
             }
@@ -234,7 +234,6 @@ Version: 1.0
         // ----------------------
         width: @flipZoneWidth;
         height: @flipZoneHeight;
-        display:none;
         overflow: hidden;
         
         > div.left_page {
@@ -250,7 +249,7 @@ Version: 1.0
             // -----------------------
             .flip(@flipLeftPageX , @flipLeftPageY, (-1*@flipDeg), 0, 0);
             .flip-page(@flipTimer);
-            .box-shadow (0, 0, @shadowWidth, @shadowAlpha);
+            .box-shadow (0, 0, @shadowWidth, @shadowWidth, @shadowAlpha);
             position: relative;
             width: @magPageWidth;
             height: @magPageHeight;
@@ -306,7 +305,6 @@ Version: 1.0
             height: @flipHeight;
             position: absolute;
             right:0;
-            overflow: visible;
             
             &:hover {
                 cursor: pointer;
@@ -431,11 +429,11 @@ Version: 1.0
         }
 
         .hard_cover  {
+            .rotate-perspective(3500px);
             .hard_cover_rotator{
                 width: @magInWidth;
                 height: @magInHeight;
                 position: absolute;
-                .rotate-perspective(500);
             }
             
             .right_cover_holder {
@@ -503,7 +501,7 @@ Version: 1.0
                 > div.left_page {
 
                     border: none;
-                    .box-shadow (0, 0, @shadowWidth, @shadowAlpha);
+                    .box-shadow (0, 0, @shadowWidth, @shadowWidth, @shadowAlpha);
                     position: relative;
                     width: @magInWidth;
                     height: @magInHeight;
@@ -540,7 +538,7 @@ Version: 1.0
             }
             
             .flip_corner {
-                .z-pixel(2px);
+                //.z-pixel(2px);
                 .rotate-visibility(visible);
                 height: 100%;
                 
@@ -683,34 +681,34 @@ Version: 1.0
     &.book {
         .front_cover.flip_left {
             .hard_cover_rotator {
-                .rotate-page(180deg,0,0,visible); 
+                .rotate-page(-180deg,0,0,visible); 
             }
         }
         
         .back_cover.flip_left {
             .flip_corner {
-                .z-pixel(3px);
+               //.z-pixel(2px);
             }
             .hard_cover_rotator {
-                .rotate-page(180deg,0,0,visible,-1px);  //for safari
+                .rotate-page(-180deg,0,0,visible,-1px);  //for safari
             } 
         }
         
         .hard_cover.show_corner {
             .hard_cover_rotator {
-                .rotate-page(10deg,0,0,visible);
+                .rotate-page(-10deg,0,0,visible);
             }
         }
         
         .front_cover.flip_left.show_corner {
             .hard_cover_rotator {
-                .rotate-page(170deg,0,0,visible);
+                .rotate-page(-170deg,0,0,visible);
             }
         }
         
         .back_cover.flip_left.show_corner {
             .hard_cover_rotator {
-                .rotate-page(170deg,0,0,visible,-1px);
+                .rotate-page(-170deg,0,0,visible,-1px);    //for safari
             }
         }
 

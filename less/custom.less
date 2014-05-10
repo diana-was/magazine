@@ -56,16 +56,6 @@ body {
     overflow-y:auto;
 }
 
-#test {
-    .box-sizing(border-box);
-    width:50px; 
-    height:50px;
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid #000000;
-    background: #ff0000;
-}
-
 // Buttons
 .btn {
     text-transform: uppercase;
@@ -115,12 +105,6 @@ h1, h2, h3, h4, h5, h6,
 // Sprite class
 .spr { .sprite(); }
 
-.magazine_help {
-    color: @gray-light;
-    border-color: @gray-light;
-}
-
-
 // Sreens 
 .magazine-xs {
   @media (max-width: @screen-xs-max) {
@@ -142,43 +126,45 @@ h1, h2, h3, h4, h5, h6,
 
 html,
 body {
-    position: relative; // for footer position:absolute
     -webkit-font-smoothing: antialiased;
 }
 
-#magazineSection {
-    margin: 0;
-    position:relative;
 
-    // Magazine
-    .magazine-header {
-        background-color:  @body-invert-bg;
-        color: @text-invert-color;
+#magazineSection {
+    width: 100%;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    margin: 0;
+
+    #headerColumn {
+        .magazine-header {
+           background-color:  @body-invert-bg;
+           color: @text-invert-color;
+            
+           width:100%;
+           height: 10%;
+           overflow: auto;
+           z-index: @zindex-bars;
         
-       width:100%;
-       height: 10%;
-       overflow: auto;
-       z-index: @zindex-bars;
-    
-       min-height: @line-height-computed + round(@line-height-computed / 2) + @font-size-h2 + 4px;
-       margin: 0 0 0 0;
-    
-       // Prevent floats from breaking the navbar
-       &:extend(.clearfix all);
-    
-       @media (min-width: @grid-float-breakpoint) {
-       }
-       
-       #logo {
-          padding-left: 45%;
-       }
-    
-        .btn-link {
-            color : @link-invert-color;
-            &:hover,
-            &:focus  {
-                color: @link-invert-hover-color;
-            }
+           min-height: @line-height-computed + round(@line-height-computed / 2) + @font-size-h2 + 4px;
+           margin: 0 0 0 0;
+        
+           // Prevent floats from breaking the navbar
+           &:extend(.clearfix all);
+        
+           #logo {
+              padding-left: 45%;
+           }
+        
+           .btn-link {
+               color : @link-invert-color;
+               &:hover,
+               &:focus  {
+                   color: @link-invert-hover-color;
+               }
+           }
         }
     }
     
@@ -191,29 +177,35 @@ body {
         }
     }
     
+}
+
+#footerSection {
+    width: 100%;
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    background-color:  @body-invert-bg;
+    
     #footerColumn {
-        .box-sizing(padding-box);
         color: @text-invert-color;
-        background-color:  @body-invert-bg;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
         padding: 0.5em 2em;
-        z-index: 1;
-        #magazineFooter {
-        }
     }
-        
+}
+
+// Magazine
+#viewZone {        
+    color: @mag-text-color;
+    
     .desk {
         background: @body-bg;
     }
     
+    .magazine_help {
+        border-color: @mag-border-color;
+    }
+    
     #magazine{
-        color: @mag-text-color;
-        .magazine_help {
-            border-color: @mag-border-color;
-        }
         // Front page - right page
         // -----------------------
         // |          |          |
@@ -240,13 +232,6 @@ body {
             > div.left_page  [data-type]{
                 background: @mag-bg;
             }
-        }
-        
-        div [data-type='endpaper'],
-        div [data-type='frontflap'],
-        div [data-type='backflap']  {
-            width : 100%;
-            height: 100%;
         }
         
         #magazineIndex {

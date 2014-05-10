@@ -47,7 +47,7 @@
           box-sizing: @box-model;
 }
 
-.box-shadow (@x: 0px; @y: 3px; @blur: 5px; @alpha: 0.5) {
+.box-shadow (@x: 0px; @y: 3px; @blur: 5px; @spread:5px; @alpha: 0.5) {
     box-shadow:         @x @y @blur rgba(0, 0, 0, @alpha);
     -moz-box-shadow:    @x @y @blur rgba(0, 0, 0, @alpha);
     -o-box-shadow:      @x @y @blur rgba(0, 0, 0, @alpha);
@@ -83,39 +83,39 @@
 
 // Page flip mixing
 .rotate(@dg;@x:50%;@y:50%) {
-    transform-origin:@x @y;
-    transform:rotate(@dg);
     -ms-transform-origin:@x @y; 
     -ms-transform: rotate(@dg);         // IE 9
     -webkit-transform-origin:@x @y; 
     -webkit-transform: rotate(@dg);     // Safari and Chrome    
+    transform-origin:@x @y;
+    transform:rotate(@dg);
 }
 
 .translate(@tx;@ty;@x:50%;@y:50%) {
-    transform-origin:@x @y;
-    transform:translate(@tx,@ty);
     -ms-transform-origin:@x @y;
     -ms-transform: translate(@tx,@ty);      // IE 9 
     -webkit-transform-origin:@x @y;         
     -webkit-transform: translate(@tx,@ty);  // Safari and Chrome
+    transform-origin:@x @y;
+    transform:translate(@tx,@ty);
 }
 
 .flip(@tx;@ty;@dg;@x:50%;@y:50%) {
-    transform-origin:@x @y;
-    transform:translate(@tx,@ty) rotate(@dg);
     -ms-transform-origin:@x @y; 
     -ms-transform: translate(@tx,@ty) rotate(@dg);          //IE 9
     -webkit-transform-origin:@x @y; 
     -webkit-transform: translate(@tx,@ty) rotate(@dg);      // Safari and Chrome
+    transform-origin:@x @y;
+    transform:translate(@tx,@ty) rotate(@dg);
 }
 
 .flip-corner(@tx;@ty;@dg;@t2x;@t2y;@x:50%;@y:50%) {
-    transform-origin:@x @y;
-    transform:translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y);
     -ms-transform-origin:@x @y; /* IE 9 */
     -ms-transform: translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y);     //IE 9
     -webkit-transform-origin:@x @y; /* Safari and Chrome */
     -webkit-transform: translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y); // Safari and Chrome
+    transform-origin:@x @y;
+    transform:translate(@tx,@ty) rotate(@dg) translate(@t2x,@t2y);
 }
 
 .rotate-perspective(@v) {
@@ -139,9 +139,9 @@
 }
 
 .rotate-page(@dg;@x:50%;@y:50%;@v:hidden;@z:1px) {
-    transform-origin:@x @y;
     -ms-transform-origin:@x @y; /* IE 9 */
     -webkit-transform-origin:@x @y; /* Safari and Chrome */
+    transform-origin:@x @y;
 
     .rotate-preserve();
     .rotate-visibility(@v);
@@ -151,70 +151,70 @@
 }
 
 .transition-duration (@t:1s){
-    transition-duration: @t;
     -ms-transition-duration: @t;
     -webkit-transition-duration: @t;
+    transition-duration: @t;
 }
 
-.transition-timing-function (@f:easy){
-    transition-timing-function: @f;
+.transition-timing-function (@f:easy-in-out){
     -ms-transition-timing-function: @f;
     -webkit-transition-timing-function: @f;
+    transition-timing-function: @f;
 }
 
-.transition-delay (@d:0){
-    transition-delay: @d;
+.transition-delay (@d:0s){
     -ms-transition-delay: @d;
     -webkit-transition-delay: @d;
+    transition-delay: @d;
 }
 
 
-.flip-page (@t:1s;@f:easy-in-out;@d:0){
+.flip-page (@t:1s;@f:easy-in-out;@d:0s){
     .transition-duration(@t);
     .transition-timing-function(@f);
     .transition-delay(@d);
 
-    transition-property: transform,  transform-origin;
     -moz-transition-property: transform,  transform-origin;
     -o-transition-property: transform,  transform-origin;
     -ms-transition-property: -ms-transform, -ms-transform-origin;               // IE
     -webkit-transition-property: -webkit-transform, -webkit-transform-origin;   // Safari 
+    transition-property: transform,  transform-origin;
 }
 
-.widden-page (@t:1s;@f:easy-in-out;@d:0){
+.widden-page (@t:1s;@f:easy-in-out;@d:0s){
     .transition-duration(@t);
     .transition-timing-function(@f);
     .transition-delay(@d);
 
-    transition-property: width;
     -moz-transition-property: width;        // Firefox 4 
     -o-transition-property: width;          // Opera
     -ms-transition-property: width;         //IE
     -webkit-transition-property: width;     // Safari 
+    transition-property: width;
 }
 
-.transition-margin (@t:1s;@f:easy-in-out;@d:0){
+.transition-margin (@t:1s;@f:easy-in-out;@d:0s){
     .transition-duration(@t);
     .transition-timing-function(@f);
     .transition-delay(@d);
 
-    transition-property: margin;
     -moz-transition-property: margin;       // Firefox 4 
     -o-transition-property: margin;         // Opera
     -ms-transition-property: margin;        //IE
     -webkit-transition-property: margin;    // Safari 
+    transition-property: margin;
 }
 
-.showcorner-left-page (@t:1s;@f:easy-in-out;@d:0){
+.showcorner-left-page (@t:1s;@f:easy-in-out;@d:0s){
     .transition-duration(@t);
     .transition-timing-function(@f);
     .transition-delay(@d);
 
-    transition-property: border-top-left-radius;
     -moz-transition-property: border-top-left-radius;        // Firefox 4 
     -o-transition-property: border-top-left-radius;          // Opera
     -ms-transition-property: border-top-left-radius;         //IE
     -webkit-transition-property: border-top-left-radius;     // Safari 
+    transition-property: border-top-left-radius;
 }
 
 .right-page-flip(@x;@y;@deg;@t:1s) {
