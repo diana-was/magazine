@@ -5143,44 +5143,48 @@ body {
   padding: 0.5em 2em;
 }
 /* line 197, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+.portrait_mode #footerSection {
+  display: none;
+}
+/* line 203, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone {
   color: #222222;
 }
-/* line 200, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 206, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone .desk {
   background: #ffffff;
 }
-/* line 204, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 210, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone .magazine_help {
   border-color: #c2c2c2;
 }
-/* line 218, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 224, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine .right_page_holder > div.right_page [data-type] {
   background: #ffffff;
 }
-/* line 232, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 238, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine .left_page_holder > div.left_page [data-type] {
   background: #ffffff;
 }
-/* line 239, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 245, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine #magazineIndex > h3 {
   text-align: center;
 }
-/* line 246, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 252, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine #magazineIndex > ul a:hover,
 #viewZone #magazine #magazineIndex > ul a:focus {
   color: #eeeeee;
   background-color: #222222;
 }
-/* line 252, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 258, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine #magazineIndex > ul a span.pagenumber {
   float: right;
 }
-/* line 258, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 264, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine #magazineIndex .nav-pills > li > a {
   border-radius: 0;
 }
-/* line 260, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
+/* line 266, /Users/diana.devargassoler/src/projects/test/Magazine responsive/less/custom.less */
 #viewZone #magazine #magazineIndex .nav-pills > li > a:active,
 #viewZone #magazine #magazineIndex .nav-pills > li > a.active {
   border-color: #222222;

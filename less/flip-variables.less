@@ -37,6 +37,18 @@
 @nav-link-hover-bg:     @gray;     
 @nav-link-padding:      10px 15px;;
 
+// Define the breakpoints at which your layout will change, adapting to different screen sizes.
+@screen-xs-min:              480px;
+@screen-sm-min:              768px;
+@screen-md-min:              992px;
+@screen-lg-min:              1200px;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+
 // Page Size
 // -------------------------
 @ratio          : 2/3;  //2/3; //4/3; // 3:4

@@ -63,6 +63,24 @@ Version: 1.0
   padding: 1em;
   margin: 0 auto 0 15%;
 }
+@media (max-width: 767px) {
+  .desk .magazine_help {
+    position: absolute;
+    top: 20%;
+    min-width: 100px;
+    width: 40%;
+    margin: 0 auto 0 5%;
+  }
+}
+@media (max-width: 991px) {
+  .desk .magazine_help {
+    position: absolute;
+    top: 20%;
+    min-width: 100px;
+    width: 40%;
+    margin: 0 auto 0 5%;
+  }
+}
 .desk #innerHolder {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -464,6 +482,8 @@ Version: 1.0
   backface-visibility: visible;
   height: 100%;
   top: 0;
+  left: auto;
+  right: auto;
 }
 #magazine.book .hard_cover .right_cover_holder {
   width: 100%;
@@ -901,4 +921,12 @@ Version: 1.0
   #magazine #magazineIndex .justified > li > a {
     margin-bottom: 0;
   }
+}
+.portrait_mode {
+  -ms-transform-origin: 0 0;
+  -ms-transform: translate(100%, 0) rotate(90deg);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: translate(100%, 0) rotate(90deg);
+  transform-origin: 0 0;
+  transform: translate(100%, 0) rotate(90deg);
 }

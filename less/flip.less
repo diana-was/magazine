@@ -42,7 +42,6 @@ Version: 1.0
     }
 
     .magazine_help {
-       //z-index : 10;
        .box-sizing(border-box); 
        position: absolute;
        top: 45%;
@@ -51,6 +50,26 @@ Version: 1.0
        border: 1px solid;
        padding: 1em;
        margin: 0 auto 0 15%;
+    }
+    
+    @media (max-width: @screen-xs-max) {
+        .magazine_help {
+           position: absolute;
+           top: 20%;
+           min-width : 100px;
+           width: 40%;
+           margin: 0 auto 0 5%;
+        }
+    }
+    
+    @media (max-width: @screen-sm-max) {
+        .magazine_help {
+           position: absolute;
+           top: 20%;
+           min-width : 100px;
+           width: 40%;
+           margin: 0 auto 0 5%;
+        }
     }
     
     #innerHolder {
@@ -84,7 +103,6 @@ Version: 1.0
 #magazine{
     
     .leaf {
-        //position: relative;
         position: absolute;
         top: 0;
         left: 0;
@@ -441,6 +459,8 @@ Version: 1.0
                 height: 100%;
                 // reset all settings
                 top: 0;
+                left:auto;
+                right:auto;
             }
             
             .right_cover_holder {
@@ -741,16 +761,25 @@ Version: 1.0
             width   : 0;
         }
         .rp_shadow_gradient {
-           width   : 0;
+            width   : 0;
         }
     }
 
     .show_corner.on_left div.left_page [data-type] {
-       .showcorner-left-page (1s);
-       border-top-left-radius: @flipWidth @flipHeight;
+        .showcorner-left-page (1s);
+        border-top-left-radius: @flipWidth @flipHeight;
+        //&:after {
+        //    content: '';
+        //    position: absolute;
+        //    top: @magMarginH;
+        //    left: @magMargin;
+        //    height: 0;
+        //    width: ceil(@flipWidth);
+        //    border-bottom: 100px solid @bodyBackground; //transparent
+        //    border-left: 100px solid transparent; //transparent
+        //}
     }
     
-
     #magazineIndex  {
         .box-sizing(padding-box);
         padding: 2% 7%;
@@ -871,9 +900,9 @@ Version: 1.0
             }
           }
         }
-        
-        
-        
     }
+}
 
+.portrait_mode {
+    .flip(100%,0,90deg,0,0);
 }

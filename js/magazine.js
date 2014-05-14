@@ -229,7 +229,7 @@
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="left_page_rotator" style="z-index:inherit">' + 
+                                '<div class="left_page_rotator" style="z-index:'+ (index+2) +'">' + 
                                     '<div class="left_page_holder">' +
                                         '<div class="left_page" data-page="'+ (pages+1) +'">' +
                                             '<div class="left_page_gradient"></div>' +
@@ -321,10 +321,27 @@
             /* Show the corner fliped */
             $magazine.find(".flip_corner").hover(function (e) {
                 e.preventDefault();
-                $(this).parent(".leaf").addClass("show_corner");
+                var $leaf = $(this).parent(".leaf");
+                $leaf.addClass("show_corner");
+                if (!$leaf.hasClass('hard_cover')) {
+                    var index = $leaf.hasClass("flip_left")?$leaf.data("leftindex"):$leaf.data('rightindex');
+                    $leaf.children('.right_page_rotator').css('z-index',index+1);
+                    $leaf.children('.left_page_rotator').css('z-index',index+2);
+                }
             },function (e) {
                 e.preventDefault();
-                $(this).parent(".leaf").removeClass("show_corner");
+                var $leaf = $(this).parent(".leaf");
+                $leaf.removeClass("show_corner");
+                if (!$leaf.hasClass('hard_cover')) {
+                    if ($leaf.hasClass("flip_left")) {
+                        $leaf.children('.right_page_rotator').css('z-index','inherit');
+                        $leaf.children('.left_page_rotator').css('z-index','inherit');
+                    } else {
+                        var index = $leaf.data('rightindex');
+                        $leaf.children('.right_page_rotator').css('z-index',index+1);
+                        $leaf.children('.left_page_rotator').css('z-index','inherit');
+                    }
+                }
             });
 
             /* flip the page back or ford */
@@ -339,8 +356,6 @@
                     right   = !$leaf.hasClass("flip_left");
 
                 if (typeof(e.pageX) !== 'undefined') { $.manageMagazine.flipOn($this); }
-                //$leaf.find('.right_page_rotator').css('z-index','initial');
-                //$leaf.css('z-index',$leaf.data("rightindex"));
                 $.manageMagazine.changeIndex($leaf,'f');
                 
                 if (right) {
@@ -868,9 +883,25 @@
                 return _getIndex();
             },
             
+            magazinePortrait : function() {
+                // Portrait device
+                if ((screen.width <= 768) && (screen.width < screen.height)) {
+                    $('body').addClass("portrait_mode").css('width',screen.height).css('height',screen.width);
+                    $('body').scrollLeft(screen.height);
+                }
+                else {
+                    $('body').removeClass("portrait_mode").css('width','100%').css('height','100%');
+                }
+            },
+            
             magazineResize: function($container) {
-                var  h = $window.height() - (magHldPctOut?($window.height() * magHldMrgOut / 100):magHldMrgOut) - (magHldPctIn?($window.height() * magHldMrgIn / 100):magHldMrgIn),
-                     w = ($container.width() > 0)?$container.width():$window.width(),
+                // Check portrait
+                $.manageMagazine.magazinePortrait();
+
+                var  wh= $('body').hasClass("portrait_mode")?$window.width():$window.height();
+                     ww= $('body').hasClass("portrait_mode")?$window.height():$window.width();
+                     h = wh - (magHldPctOut?(wh * magHldMrgOut / 100):magHldMrgOut) - (magHldPctIn?(wh * magHldMrgIn / 100):magHldMrgIn),
+                     w = ($container.width() > 0)?$container.width():ww,
                      wx = Math.round(h/magRatio) * 2,
                      wt = ((wx < w)?Math.round(wx * 100 / w):100);
                $('#viewZone').css('width',wt+'%');
